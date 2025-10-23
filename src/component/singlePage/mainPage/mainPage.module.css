@@ -1,0 +1,134 @@
+.aboutSection {
+  display: grid;
+  grid-auto-flow: column;
+  background-color: var(--bg-about);
+  padding-inline-start: 203px;
+  padding-inline-end: 212px;
+}
+
+.aboutText {
+  display: grid;
+  justify-content: flex-start;
+  row-gap: 23px;
+  margin-block-start: 76px;
+  margin-block-end: 111px;
+}
+
+.aboutTitle {
+  font-family: var(--font-main), sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  color: var(--title-text-color);
+  max-inline-size: 581px;
+}
+
+.aboutListItem {
+  position: relative;
+  margin-inline-start: 20px;
+  font-family: var(--font-main), sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--main-text-color);
+}
+
+.aboutListItem::before {
+  content: '•';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--main-text-color);
+  font-size: 16px;
+}
+
+.aboutImg {
+  margin-block: 23px;
+}
+
+.infoSection {
+  padding-inline: 142px;
+  padding-block-start: 58px;
+  padding-block-end: 87px;
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 64px;
+}
+
+.priceContainer {
+  display: grid;
+  row-gap: 83px;
+  justify-items: center;
+  background-color: var(--bg-price-container);
+  padding-inline: 94px;
+  padding-block: 67px;
+  inline-size: max-content;
+  block-size: max-content;
+  border-radius: 50px;
+}
+
+.priceTitle {
+  font-family: var(--font-second), sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  color: var(--price-color);
+  max-inline-size: 335px;
+}
+
+.priceTotal {
+  font-family: var(--font-second), sans-serif;
+  font-weight: 500;
+  font-size: 25px;
+  color: var(--price-color);
+}
+
+.totalAmount {
+  font-weight: 600;
+}
+
+.priceContainerInput {
+  display: grid;
+  row-gap: 37px;
+}
+
+.priceInput {
+  background-color: transparent;
+  inline-size: 286px;
+  max-block-size: 55px;
+  padding-block: 20px;
+  padding-inline: 30px;
+  text-align: center;
+  border: 2px solid var(--input-border);
+  border-radius: 100px;
+}
+
+.priceInput::placeholder {
+  font-family: var(--font-second), sans-serif;
+  color: var(--input-text-color);
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.priceButton {
+  background-color: var(--button-price-color);
+  border: none;
+  border-radius: 100px;
+  padding-block: 20px;
+  padding-inline: 30px;
+  text-align: center;
+  color: var(--logo-main-color);
+  inline-size: 285px;
+}
+
+.carouselContent {
+  padding-inline: 155px;
+  padding-block: 66px;
+}
+
+.carouselTitle {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--color-footer-text);
+  text-align: center;
+  margin-block-end: 70px;
+}

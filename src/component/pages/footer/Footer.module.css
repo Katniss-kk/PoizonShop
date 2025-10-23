@@ -1,0 +1,22 @@
+footer {
+    padding-block-start: 68px;
+    padding-block-end: 184px;
+    padding-inline: 150px;
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.botButton {
+  background-color: var(--bot-button-bg);
+  border: 1px solid var(--bot-button-border);
+  grid-row: 2/3;
+  grid-column: 1/4;
+}
+
+.buttonSpan {
+    color: var(--bot-text-colorButton);
+}
+
+.logoColor {
+    fill: var(--logo-main-color);
+}

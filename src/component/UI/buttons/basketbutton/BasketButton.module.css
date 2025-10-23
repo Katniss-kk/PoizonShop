@@ -1,0 +1,7 @@
+.basket {
+    fill: var(--basket-color);
+    inline-size: 66px;
+    block-size: 66px;
+    background-color: transparent;
+    border: none;
+}

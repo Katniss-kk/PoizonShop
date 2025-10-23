@@ -1,0 +1,69 @@
+.customSwiperContainer {
+
+}
+
+div .productCard {
+    display: grid;
+    justify-items: center;
+    max-inline-size: 375px;
+    max-block-size: 323px;
+    padding-block-start: 9px;
+    padding-block-end: 36px;
+    padding-inline: 28px;
+}
+
+.productImage {
+    inline-size: 271px;
+    block-size: 163px;
+}
+
+.productContainer {
+    display: grid;
+    justify-items: center;
+    font-family: var(--font-second);
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.productTitle {
+    margin-block-start: 23px;
+}
+
+.productBrand {
+    margin-block-start: 9px;
+    color: var(--brand-text-color);
+}
+
+.productPrice {
+    margin-block-start: 23px;
+    font-size: 18px;
+}
+
+.digitalPagination {
+    justify-self: center;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 42px;
+}
+
+/* .currentPage {
+    font-family: var(--font-second);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--title-text-color);
+} */
+
+.paginationBtn {
+    border: none;
+    inline-size: 20px;
+    block-size: 20px;
+    background-color: transparent;
+}
+
+.buttonSvg {
+    fill: var(--button-svg-color);
+}
+
+button:disabled .buttonSvg {
+    fill: var(--button-svg-colorDeactive);
+}

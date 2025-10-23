@@ -1,0 +1,18 @@
+.menu {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 64px;
+  grid-template-columns: repeat(5, max-content);
+  inline-size: max-content;
+  margin-inline-end: 230px;
+}
+
+.menuButton {
+  font-family: var(--font-main), "sans-serif";
+  font-weight: 400;
+  color: var(--main-text-color);
+  font-size: 18px;
+  border: none;
+  background-color: transparent;
+  inline-size: max-content;
+}
