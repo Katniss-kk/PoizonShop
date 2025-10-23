@@ -1,0 +1,28 @@
+.helpContainer {
+  display: grid;
+  grid-auto-rows: max-content;
+  justify-items: flex-start;
+  max-inline-size: max-content;
+  max-block-size: max-content;
+  row-gap: 27px;
+}
+
+.text {
+  font-family: var(--font-second), 'sans-serif';
+  font-size: 18px;
+  color: var(--color-footer-text);
+}
+
+.title {
+  font-weight: 500;
+  margin-block-end: 20px;
+}
+
+.helpButton {
+  background-color: transparent;
+  border: none;
+  font-weight: 400;
+  max-block-size: max-content;
+  max-inline-size: max-content;
+  text-align: start;
+}

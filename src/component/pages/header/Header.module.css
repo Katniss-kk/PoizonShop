@@ -1,0 +1,29 @@
+header {
+    inline-size: 100%;
+    block-size: 97px;
+    background-color: var(--bg-header);
+    border: 1px solid var(--header-border);
+    padding-inline: 150px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(4, max-content);
+    align-items: center;
+}
+
+.logo {
+    fill: var(--logo-main-color);
+    margin-inline-end: 70px;
+}
+
+.topButton {
+    background-color: var(--top-button-bg);
+    color: var(--top-text-colorButton);
+}
+
+.buttonSpan {
+    color: var(--top-text-colorButton);
+}
+
+.logoColor {
+    fill: var(--logo-second-color);
+}

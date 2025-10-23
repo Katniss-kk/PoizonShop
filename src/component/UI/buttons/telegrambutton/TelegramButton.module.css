@@ -1,0 +1,30 @@
+.button {
+  font-family: var(--font-second), 'sans-serif';
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 15px;
+  inline-size: max-content;
+  block-size: max-content;
+  padding-block: 17px;
+  padding-inline: 23px;
+  margin-inline-start: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  grid-template-rows: repeat(2, max-content);
+  column-gap: 10px;
+}
+
+.logo {
+  inline-size: 20.7px;
+  block-size: 29px;
+  grid-column: 1/2;
+  grid-row: 1/3;
+  align-self: center;
+}
+
+.spanButton {
+  font-weight: 400;
+  font-size: 13px;
+  text-align: start;
+}

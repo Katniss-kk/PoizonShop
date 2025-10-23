@@ -1,0 +1,26 @@
+:root {
+  --bg-header: #ffffff80;
+  --font-main: DMSans;
+  --font-second: Inter;
+  --top-button-bg: #57bfc1;
+  --bot-button-bg: #ffffff;
+  --bot-button-border: #d1d5db;
+  --logo-main-color: #57bfc1;
+  --logo-second-color: #ffffff;
+  --top-text-colorButton: #f9ffff;
+  --bot-text-colorButton: #000000;
+  --basket-color: #73818e;
+  --header-border: #d1d5db;
+  --title-text-color: #000000;
+  --main-text-color: #73818e;
+  --color-footer-text: #1f2a37;
+  --brand-text-color: #8E8E8E;
+  --input-border: #57BFC1;
+  --input-text-color: rgba(87, 191, 193, 0.5);
+  --button-price-color: rgba(87, 191, 193, 0.15);
+  --price-color: #050F0F;
+  --bg-about: #e2e8f0;
+  --bg-price-container: rgba(87, 191, 193, 0.06);
+  --button-svg-color: #1F2A37;
+  --button-svg-colorDeactive: #424242;
+}
