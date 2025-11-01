@@ -1,4 +1,4 @@
-import type { IProduct } from '../src/component/UI/index';
+import type { IProduct } from "../src/component/types";
 
 export const DataShoes: IProduct[] = [
   {
