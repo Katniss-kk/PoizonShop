@@ -12,7 +12,7 @@ header {
 
 .logo {
     fill: var(--logo-main-color);
-    margin-inline-end: 70px;
+    margin-inline-end: 76px;
 }
 
 .topButton {
@@ -26,4 +26,9 @@ header {
 
 .logoColor {
     fill: var(--logo-second-color);
+}
+
+.headerContainer {
+    display: grid;
+    grid-auto-flow: column;
 }

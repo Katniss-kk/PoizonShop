@@ -1,18 +1,14 @@
 import style from './CardCarousel.module.css';
-import type { IProduct } from '../../index';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { CardItem } from '../..';
+
+import type { CardCarouselProps } from '../../../types';
 
 import 'swiper/swiper.css';
 import 'swiper/swiper-bundle.css';
-
-interface CardCarouselProps {
-  items: IProduct[];
-  autoPlay?: boolean;
-  showPagination?: boolean;
-}
 
 export default function CardCarousel({
   items,
@@ -37,7 +33,6 @@ export default function CardCarousel({
               snapIndex / (itemsPerPage / swiper.params.slidesPerGroup)
             ) + 1;
           setCurrentPage(Math.min(newPage, totalPages));
-          console.log('Snap Index:', snapIndex, 'Page:', newPage);
         }}
         modules={[Navigation, Autoplay]}
         spaceBetween={20}
@@ -50,21 +45,10 @@ export default function CardCarousel({
       >
         {items.map(item => (
           <SwiperSlide
-            key={`${item.type}-${item.title}`}
+            key={`${item.title}-${item.brand}`}
             className={style.productCard}
           >
-            {item.img && item.img[0] && (
-              <img
-                src={item.img[0]}
-                alt={item.title}
-                className={style.productImage}
-              />
-            )}
-            <div className={style.productContainer}>
-              <h5 className={style.productTitle}>{item.title}</h5>
-              <span className={style.productBrand}>{item.brand}</span>
-              <h4 className={style.productPrice}>{item.price} ₽</h4>
-            </div>
+            <CardItem item={item} producCustomtImage={style.producCustomtImage}/>
           </SwiperSlide>
         ))}
       </Swiper>

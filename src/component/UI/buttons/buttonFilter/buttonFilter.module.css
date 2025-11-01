@@ -1,0 +1,23 @@
+.button {
+    background-color: transparent;
+    border: 1px solid var(--border-button);
+    border-radius: 100px;
+    inline-size: max-content;
+    padding-inline: 11px;
+    padding-block: 5px;
+    font-family: var(--font-second);
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--color-main-text);
+    text-align: center;
+}
+
+.svg {
+    margin-inline-start: 16.54px;
+}
+
+.button:focus {
+    border: 1px solid var(--border-button-focus);
+    outline: none;
+    background-color: var(--bg-button-focus);
+}

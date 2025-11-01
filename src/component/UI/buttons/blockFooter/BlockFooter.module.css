@@ -10,7 +10,7 @@
 .text {
   font-family: var(--font-second), 'sans-serif';
   font-size: 18px;
-  color: var(--color-footer-text);
+  color: var(--color-main-text);
 }
 
 .title {

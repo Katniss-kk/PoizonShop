@@ -12,33 +12,6 @@ div .productCard {
     padding-inline: 28px;
 }
 
-.productImage {
-    inline-size: 271px;
-    block-size: 163px;
-}
-
-.productContainer {
-    display: grid;
-    justify-items: center;
-    font-family: var(--font-second);
-    font-weight: 400;
-    font-size: 16px;
-}
-
-.productTitle {
-    margin-block-start: 23px;
-}
-
-.productBrand {
-    margin-block-start: 9px;
-    color: var(--brand-text-color);
-}
-
-.productPrice {
-    margin-block-start: 23px;
-    font-size: 18px;
-}
-
 .digitalPagination {
     justify-self: center;
     display: grid;
@@ -66,4 +39,9 @@ div .productCard {
 
 button:disabled .buttonSvg {
     fill: var(--button-svg-colorDeactive);
+}
+
+.producCustomtImage {
+    inline-size: 271px;
+    block-size: 163px;
 }

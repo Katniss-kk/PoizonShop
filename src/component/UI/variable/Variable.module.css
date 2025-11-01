@@ -13,7 +13,7 @@
   --header-border: #d1d5db;
   --title-text-color: #000000;
   --main-text-color: #73818e;
-  --color-footer-text: #1f2a37;
+  --color-main-text: #1f2a37;
   --brand-text-color: #8E8E8E;
   --input-border: #57BFC1;
   --input-text-color: rgba(87, 191, 193, 0.5);
@@ -23,4 +23,13 @@
   --bg-price-container: rgba(87, 191, 193, 0.06);
   --button-svg-color: #1F2A37;
   --button-svg-colorDeactive: #424242;
+  --separator-color: #D1D5DB;
+  --border-button: #1F2A37;
+  --border-button-focus: #1AAAEA;
+  --bg-button-focus: #F0F9FF;
+  --border-modal: #D1D5DB;
+  --bg-modal-button: rgba(87, 191, 193, 0.05);
+  --bg-button-apply: #1F2A37;
+  --color-text-button: #FFFFFF;
+  --bg-main: #F9F9F9
 }

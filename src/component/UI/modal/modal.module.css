@@ -1,0 +1,42 @@
+.overlay {
+    position: absolute;
+    top: 30px;
+    z-index: 3;
+    background-color: var(--bg-main);
+    border-radius: 20px;
+    border: 1px solid var(--border-modal);
+    inline-size: 374px;
+}
+
+.modal {
+}
+
+.containerButton {
+    background-color: var(--bg-modal-button);
+    padding-inline: 18px;
+    padding-block: 27px;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 132px;
+}
+
+.button {
+    inline-size: max-content;
+    padding-inline: 20px;
+    padding-block: 15px;
+    border-radius: 100px;
+    font-family: var(--font-second);
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.buttonReset {
+    border: 1px solid var(--border-modal);
+    background-color: transparent;
+    color: var(--color-main-text);
+}
+
+.buttonApply {
+    background-color: var(--bg-button-apply);
+    color: var(--color-text-button);
+}

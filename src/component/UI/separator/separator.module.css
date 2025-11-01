@@ -1,0 +1,6 @@
+.separator {
+    inline-size: 100%;
+    block-size: 1px;
+    border: 1px stroke var(--separator-color);
+    background-color: var(--separator-color);
+}

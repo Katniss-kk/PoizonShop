@@ -1,0 +1,21 @@
+.productContainer {
+    display: grid;
+    justify-items: center;
+    font-family: var(--font-second);
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.productTitle {
+    margin-block-start: 23px;
+}
+
+.productBrand {
+    margin-block-start: 9px;
+    color: var(--brand-text-color);
+}
+
+.productPrice {
+    margin-block-start: 23px;
+    font-size: 18px;
+}

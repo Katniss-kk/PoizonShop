@@ -1,0 +1,58 @@
+.textSection {
+  padding-inline: 150px;
+  padding-block-start: 53px;
+}
+
+.textContainer {
+  display: grid;
+  row-gap: 25px;
+  margin-block-end: 63px;
+}
+
+.buttonContainer {
+  position: relative;
+  margin-block-start: 53px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(3, max-content);
+  justify-items: start;
+  column-gap: 16px;
+}
+
+.title {
+  font-family: var(--font-second);
+  font-weight: 500;
+  font-size: 28px;
+  color: var(--color-main-text);
+}
+
+.catalog {
+  font-family: var(--font-second);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-main-text);
+}
+
+.containerSection {
+  margin-block-start: 63px;
+  margin-block-end: 150px;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 69px;
+  justify-items: center;
+  padding-inline: 150px;
+}
+
+.containerItem {
+  padding-inline: 30px;
+  inline-size: 494px;
+  block-size: 394px;
+  display: grid;
+  justify-items: center;
+}
+
+.productCustomImage {
+  inline-size: 430px;
+  block-size: 258px;
+}

@@ -54,7 +54,7 @@ export default function MainPage() {
           </h3>
           <div className={style.priceContainerInput}>
             <input
-              type="text"
+              type="number"
               placeholder="Цена на товар в юанях"
               className={style.priceInput}
             />

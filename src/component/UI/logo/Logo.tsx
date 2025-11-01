@@ -1,17 +1,21 @@
-export default function Logo({ className = '' }) {
+import { MainPage } from "../../singlePage";
+import type { LogoProps } from "../../types";
+
+export default function Logo({ className = '', setPage }: LogoProps) {
     return (
         <svg 
             width="49" 
             height="35" 
             viewBox="0 0 49 35"  
             xmlns="http://www.w3.org/2000/svg" 
-            className={`${className}`}
+            className={className}
+            onClick={() => setPage(<MainPage />)}
         >
-            <path d="M15.9177 0H23.346V35H15.9177V0Z" fillOpacity="0.3"/>
-            <path d="M15.9177 0H23.346L7.42826 35H0L15.9177V0Z"/>
-            <path d="M31.8355 0H39.2638V35H31.8355V0Z" fillOpacity="0.3"/>
-            <path d="M31.8481 0H39.2763L23.3586 35H15.9304L31.8481V0Z"/>
-            <path d="M41.5717 13.5919H49L39.2638 35H31.8355L41.5717 13.5919Z"/>
+            <rect x="15.9" y="0" width="7.4" height="35" fillOpacity="0.3"/>
+            <polygon points="15.9,0 23.3,0 7.4,35 0,35" />
+            <rect x="31.8" y="0" width="7.4" height="35" fillOpacity="0.3"/>
+            <polygon points="31.8,0 39.3,0 23.4,35 15.9,35" />
+            <polygon points="41.6,13.6 49,13.6 39.3,35 31.8,35" />
         </svg>
-    )
+    );
 }

@@ -7,12 +7,9 @@ export { default as BlockAddress } from './buttons/blockFooter/blockAddress/Bloc
 export { default as BlockInfo } from './buttons/blockFooter/blockInfo/BlockInfo';
 export { default as BlockSupport } from './buttons/blockFooter/blockSupport/BlockSupport';
 export { default as CardCarousel } from './cards/cardCarousel/CardCarousel';
-
-export interface IProduct {
-  type: string;
-  title: string;
-  img: string[];
-  brand: string;
-  size: string[] | number[];
-  price: string;
-}
+export { default as CardItem } from './cards/cardItem/CardItem';
+export { default as Separator } from './separator/separator';
+export { default as ButtonFilter } from './buttons/buttonFilter/buttonFilter';
+export { default as Modal } from './modal/modal';
+export { default as FilterPrice } from './filter/filterPrice/filterPrice';
+export { default as FilterBrandSize } from './filter/filterBrandSize/filterBrandSize';
