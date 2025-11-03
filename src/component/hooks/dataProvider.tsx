@@ -50,28 +50,29 @@ export function DataProvider({ children }: DataProviderProps) {
   // TODO: дописать функцию фильтрации по брендам и размерам
   // на данный момент сохраняются данные не туда и фильтрация не работает
   // нужно временное хранилище и дальнейшая реализация этот код только перебирает данные и сохраняет их
-  useEffect(() => {
-    // Бренды - убираем пустые
-    const allBrands = data.data.map(item => item.brand).filter(brand => brand);
-    const uniqueBrands = Array.from(new Set(allBrands));
-    const brandsArray = uniqueBrands.map((brand, index) => ({
-      name: brand,
-      value: index + 1,
-    }));
 
-    // Размеры - убираем пустые
-    const allSizes = data.data.map(item => item.size).filter(size => size);
-    const uniqueSizes = Array.from(new Set(allSizes)).sort((a, b) => a - b);
-    const sizesArray = uniqueSizes.map((size, index) => ({
-      name: size.toString(),
-      value: index + 1,
-    }));
+  // useEffect(() => {
+  //   // Бренды - убираем пустые
+  //   const allBrands = data.data.map(item => item.brand).filter(brand => brand);
+  //   const uniqueBrands = Array.from(new Set(allBrands));
+  //   const brandsArray = uniqueBrands.map((brand, index) => ({
+  //     name: brand,
+  //     value: index + 1,
+  //   }));
 
-    updateWaitData({
-      brands: brandsArray,
-      sizes: sizesArray,
-    });
-  }, [data.data]);
+  //   // Размеры - убираем пустые
+  //   const allSizes = data.data.map(item => item.size).filter(size => size);
+  //   const uniqueSizes = Array.from(new Set(allSizes)).sort((a, b) => a - b);
+  //   const sizesArray = uniqueSizes.map((size, index) => ({
+  //     name: size.toString(),
+  //     value: index + 1,
+  //   }));
+
+  //   updateWaitData({
+  //     brands: brandsArray,
+  //     sizes: sizesArray,
+  //   });
+  // }, [data.data]);
 
   const updateData = (newData: Partial<DataProvider>) => {
     setData(prev => ({ ...prev, ...newData }));
