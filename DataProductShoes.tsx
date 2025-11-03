@@ -46,8 +46,8 @@ export const DataShoes: IProduct[] = [
     title: 'Scroll Logo Sweatpants "Black"',
     img: ['./images/scrolllogo.png'],
     brand: 'CHROME HEARTS',
-    size: ['S', 'M', 'L', 'XL'],
-    price: '11900',
+    size: [40, 41, 42],
+    price: '11.900',
   },
     {
     type: 'Обувь',
@@ -55,7 +55,7 @@ export const DataShoes: IProduct[] = [
     img: ['./images/sb-dunk-low-mummy 1.png'],
     brand: 'CHROME HEARTS',
     size: [44, 45, 46, 47],
-    price: '11900',
+    price: '11.900',
   },
     {
     type: 'Обувь',
