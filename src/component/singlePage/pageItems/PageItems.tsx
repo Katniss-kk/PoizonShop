@@ -2,9 +2,21 @@ import type { PageItem } from '../../types';
 import { CardItem, Separator } from '../../UI';
 import style from './PageItems.module.css';
 
+import { useData } from '../../hooks/dataProvider';
+
 import { ButtonFilter } from '../../UI';
+import { useEffect } from 'react';
 
 export default function PageItems({ items, title, catalog }: PageItem) {
+  const { data, updateData } = useData();
+
+  useEffect(() => {
+    updateData({
+      data: items,
+      filterData: items
+    });
+  }, []);
+
   return (
     <>
       <section className={style.textSection}>
@@ -18,7 +30,7 @@ export default function PageItems({ items, title, catalog }: PageItem) {
         </div>
       </section>
       <section className={style.containerSection}>
-        {items.map(item => (
+        {data.filterData.map(item => (
           <div
             className={style.containerItem}
             key={`${item.title}-${item.brand}`}
