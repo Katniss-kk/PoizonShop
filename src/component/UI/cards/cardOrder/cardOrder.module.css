@@ -1,0 +1,165 @@
+.textStyle {
+  font-family: var(--font-second);
+  font-weight: 500;
+  color: var(--color-main-text);
+  text-align: start;
+}
+
+.productCard {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(7, max-content);
+  grid-auto-flow: column;
+  justify-items: center;
+}
+
+.productCardBlock {
+  display: grid;
+  justify-items: start;
+}
+
+.title {
+  font-size: 36px;
+  margin-block-end: 39px;
+}
+
+.productContainer {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: start;
+  margin-block-end: 18px;
+}
+
+.nameContainer {
+}
+
+.productImg {
+  inline-size: 276px;
+  block-size: 118px;
+  object-fit: cover;
+}
+
+.productName {
+  font-size: 24px;
+}
+
+.originalText {
+  color: #58c94e;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.originalSvg {
+  margin-inline-end: 4px;
+}
+
+.sizeContainer {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  inline-size: 100%;
+  background-color: var(--bg-size-container);
+  border: none;
+  border-radius: 20px;
+  padding: 17px 39px;
+}
+
+.size {
+  border: none;
+  background-color: transparent;
+  font-family: var(--font-second);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--color-main-text);
+}
+
+.sizeActive {
+  font-weight: 600;
+  border: 1px solid var(--bg-button-apply);
+  padding: 1px 6px;
+}
+
+.buyContainer {
+    margin-block-start: 39px;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 20px;
+}
+
+.buyTitle {
+  font-size: 22px;
+}
+
+.buyButton {
+  background-color: var(--bg-size-container);
+  padding: 26px 38px;
+  border: none;
+  border-radius: 20px;
+  max-inline-size: 242px;
+  max-block-size: 76px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.buyButtonActive {
+    border: 2px solid var(--bot-button-border);
+}
+
+.inputText {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  background-color: var(--input-order-color);
+  border: 1px solid var(--bot-button-border);
+  border-radius: 8px;
+  padding: 13px 16px;
+  inline-size: 370px;
+  block-size: 50px;
+  font-family: var(--font-second);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.resultContainer {
+    display: grid;
+    inline-size: 100%;
+    row-gap: 19px;
+}
+
+.resultBlock {
+    display: flex;
+    justify-content: space-between;
+}
+
+.textResult {
+  font-size: 22px;
+}
+
+.delivery {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0;
+  margin: 0;
+}
+
+.resultSpan {
+  font-family: var(--font-second);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--result-span-color);
+}
+
+.applyButton {
+    margin-block-start: 46px;
+    margin-block-end: 107px;
+    font-family: var(--font-second);
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--color-text-button);
+    inline-size: 100%;
+    block-size: 64px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background: radial-gradient(circle, #F8095F, #FF7168);
+}

@@ -1,10 +1,13 @@
 import style from './TopMenuButton.module.css';
-import type { topMenuProps } from '../../../types';
 import { PageItems } from '../../../singlePage';
+
+import { useData } from '../../../hooks/dataProvider';
 
 import { DataShoes } from '../../../../../public/DataProductShoes';
 
-export default function TopMenuButton({ setPage }: topMenuProps) {
+export default function TopMenuButton() {
+  const { setPage } = useData()
+
   return (
     <menu className={style.menu}>
       <button

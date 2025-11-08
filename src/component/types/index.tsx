@@ -1,10 +1,6 @@
 import type { ReactElement, ReactNode } from 'react';
 
-export interface topMenuProps {
-  setPage: (page: ReactElement) => void;
-}
-
-export interface LogoProps extends topMenuProps {
+export interface LogoProps {
   className?: string;
 }
 
@@ -45,8 +41,8 @@ export interface ModalProps {
 }
 
 export interface IBrandSize {
-  name: string;
-  value: number;
+  allBrands?: { name: string; value: number }[];
+  allSizes?: { name: string; value: number }[];
 }
 
 export interface DataProvider {
@@ -56,8 +52,10 @@ export interface DataProvider {
   maxPrice: number;
   brands: { name: string; value: number }[];
   sizes: { name: string; value: number }[];
-  minAllPrice?: number,
-  maxAllPrice?: number
+  minAllPrice?: number;
+  maxAllPrice?: number;
+  allBrands?: { name: string; value: number }[];
+  allSizes?: { name: string; value: number }[];
 }
 
 export interface DataContextType {
@@ -66,10 +64,24 @@ export interface DataContextType {
   setData: React.Dispatch<React.SetStateAction<DataProvider>>;
   updateData: (newData: Partial<DataProvider>) => void;
   updateWaitData: (newData: Partial<DataProvider>) => void;
+  updateOrder: (newOrder: Partial<order>) => void;
   setFilterData: () => void;
   resetData: () => void;
+  page: React.ReactNode;
+  setPage: React.Dispatch<React.SetStateAction<React.ReactNode>>;
+  order: order;
+  setOrder: React.Dispatch<React.SetStateAction<order>>
 }
 
 export interface DataProviderProps {
   children: ReactNode;
+}
+
+export interface order {
+  product: IProduct | '';
+  size: number | '';
+  receive: string;
+  point: string;
+  name: string;
+  number: string | '';
 }

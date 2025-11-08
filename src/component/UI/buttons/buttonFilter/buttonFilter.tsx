@@ -1,7 +1,6 @@
 import style from './buttonFilter.module.css';
 import { useState, type ReactNode, useEffect } from 'react';
 import { Modal, FilterPrice, FilterBrandSize } from '../../../UI';
-import { brands, size } from '../../../../../public/dataBrandSize'
 
 import { useData } from '../../../hooks/dataProvider';
 
@@ -93,7 +92,7 @@ export default function ButtonFilter() {
       <button
         className={style.button}
         onClick={() =>
-          toggleModal(<FilterBrandSize proops={brands} />, 'brand')
+          toggleModal(<FilterBrandSize allBrands={waitData.allBrands} />, 'brand')
         }
       >
         Бренд
@@ -102,7 +101,7 @@ export default function ButtonFilter() {
 
       <button
         className={style.button}
-        onClick={() => toggleModal(<FilterBrandSize proops={size} />, 'size')}
+        onClick={() => toggleModal(<FilterBrandSize allSizes={waitData.allSizes} />, 'size')}
       >
         Размер
         <SvgIcon />

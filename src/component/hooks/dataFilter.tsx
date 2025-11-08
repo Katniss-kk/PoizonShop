@@ -12,7 +12,19 @@ export function DataFilter(data: DataProvider): IProduct[] {
     if (data.maxPrice !== 0 && price > data.maxPrice) return false;
     if (data.brands.length > 0 && !data.brands.includes(item.brand))
       return false;
-    if (data.sizes.length > 0 && !data.sizes.includes(item.size)) return false;
+    
+    if (data.sizes.length > 0) {
+      // item.size - массив размеров, проверяем пересечение
+      const itemSizes = Array.isArray(item.size) ? item.size : [item.size];
+      const filterSizes = data.sizes.map(size => String(size).trim());
+      
+      // Проверяем, есть ли хотя бы один общий размер
+      const hasSizeMatch = itemSizes.some(itemSize => 
+        filterSizes.includes(String(itemSize).trim())
+      );
+      
+      if (!hasSizeMatch) return false;
+    }
 
     return true;
   });

@@ -42,13 +42,19 @@ export default function CardCarousel({
           autoPlay ? { delay: 3000, disableOnInteraction: false } : false
         }
         loop={false}
+        // breakpoints={{
+        //   1280: { slidesPerView: 3, slidesPerGroup: 3 },
+        // }}
       >
         {items.map(item => (
           <SwiperSlide
             key={`${item.title}-${item.brand}`}
             className={style.productCard}
           >
-            <CardItem item={item} producCustomtImage={style.producCustomtImage}/>
+            <CardItem
+              item={item}
+              producCustomtImage={style.producCustomtImage}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -16,7 +16,7 @@
   --color-main-text: #1f2a37;
   --brand-text-color: #8E8E8E;
   --input-border: #57BFC1;
-  --input-text-color: rgba(87, 191, 193, 0.5);
+  --input-text-color: #57BFC180;
   --button-price-color: rgba(87, 191, 193, 0.15);
   --price-color: #050F0F;
   --bg-about: #e2e8f0;
@@ -31,5 +31,9 @@
   --bg-modal-button: rgba(87, 191, 193, 0.05);
   --bg-button-apply: #1F2A37;
   --color-text-button: #FFFFFF;
-  --bg-main: #F9F9F9
+  --bg-main: #F9F9F9;
+  --text-color-brand: #73818E;
+  --bg-size-container: #EFEFEF;
+  --result-span-color: #73818E;
+  --input-order-color: #F9FAFB;
 }

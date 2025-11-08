@@ -13,3 +13,5 @@ export { default as ButtonFilter } from './buttons/buttonFilter/buttonFilter';
 export { default as Modal } from './modal/modal';
 export { default as FilterPrice } from './filter/filterPrice/filterPrice';
 export { default as FilterBrandSize } from './filter/filterBrandSize/filterBrandSize';
+export { default as CardSelected } from './cards/cardSelected/cardSelected';
+export { default as CardOrder } from './cards/cardOrder/cardOrder';

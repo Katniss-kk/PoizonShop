@@ -61,7 +61,7 @@
   background-color: var(--bg-price-container);
   padding-inline: 94px;
   padding-block: 67px;
-  inline-size: max-content;
+  inline-size: 540px;
   block-size: max-content;
   border-radius: 50px;
 }
@@ -79,6 +79,7 @@
   font-weight: 500;
   font-size: 25px;
   color: var(--price-color);
+  text-align: center;
 }
 
 .totalAmount {
@@ -102,8 +103,9 @@
 }
 
 .priceInput::placeholder {
-  font-family: var(--font-second), sans-serif;
+  font-family: var(--font-second);
   color: var(--input-text-color);
+  opacity: 0.5;
   font-weight: 500;
   font-size: 20px;
 }
@@ -131,4 +133,34 @@
   color: var(--color-footer-text);
   text-align: center;
   margin-block-end: 70px;
+}
+
+.infoImg {
+  inline-size: 100%;
+}
+
+@media (max-width: 1280px) {
+  .infoSection {
+    padding: 30px;
+  }
+
+  .priceContainer {
+    block-size: 417px;
+    row-gap: 10px;
+  }
+  .infoImg {
+    block-size: 100%;
+    inline-size: 100%;
+  }
+  .carouselContent {
+    padding-inline: 30px;
+    padding-block: 30px;
+  }
+}
+
+@media (max-width: 1640px) {
+  .infoImg {
+    block-size: 100%;
+    inline-size: 100%;
+  }
 }

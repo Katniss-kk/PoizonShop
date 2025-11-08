@@ -5,13 +5,13 @@ import {
   Logo,
   BasketButton,
 } from '../../UI/index';
-import type { topMenuProps } from '../../types';
+import { useData } from '../../hooks/dataProvider';
 
-export default function Header({ setPage }: topMenuProps) {
+export default function Header() {
   return (
     <header>
-      <Logo className={style.logo} setPage={setPage} />
-      <TopMenuButton setPage={setPage} />
+      <Logo className={style.logo} />
+      <TopMenuButton />
       <div className={style.headerContainer}>
         <BasketButton />
         <TelegramButton

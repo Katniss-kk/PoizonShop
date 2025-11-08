@@ -56,3 +56,21 @@
   inline-size: 430px;
   block-size: 258px;
 }
+
+@media(max-width: 1280px) {
+  .containerSection {
+    gap: 0;
+    padding: 0;
+    justify-items: start;
+  }
+  .containerItem {
+    padding: 0;
+    inline-size: 0;
+  }
+}
+
+@media(max-width: 1640px) {
+  .containerSection {
+    gap: 0;
+  }
+}

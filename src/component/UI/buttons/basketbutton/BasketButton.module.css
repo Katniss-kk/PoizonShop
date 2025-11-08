@@ -5,3 +5,7 @@
     background-color: transparent;
     border: none;
 }
+
+.basket:hover {
+    fill: var(--color-main-text);
+}

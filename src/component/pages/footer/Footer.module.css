@@ -20,3 +20,9 @@ footer {
 .logoColor {
     fill: var(--logo-main-color);
 }
+
+@media(max-width: 1280px) {
+    footer {
+        padding: 10px
+    }
+}

@@ -3,6 +3,7 @@ import type {
   DataProvider,
   DataContextType,
   DataProviderProps,
+  order,
 } from '../types';
 
 import { DataFilter } from './dataFilter';
@@ -28,7 +29,48 @@ export function DataProvider({ children }: DataProviderProps) {
     sizes: [],
     minAllPrice: 0,
     maxAllPrice: 0,
+    allBrands: [],
+    allSizes: [],
   });
+
+  const [order, setOrder] = useState<order>({
+    product: '',
+    size: '',
+    receive: '',
+    point: '',
+    name: '',
+    number: ''
+  })
+
+  const [page, setPage] = useState<React.ReactNode>();
+
+  useEffect(() => {
+    // Бренды - убираем пустые
+
+    const allBrands = data.data.map(item => item.brand).filter(brand => brand);
+    const uniqueBrands = Array.from(new Set(allBrands));
+    const brandsArray = uniqueBrands.map((brand, index) => ({
+      name: brand,
+      value: index + 1,
+    }));
+
+    // Размеры - обрабатываем массивы и убираем пустые
+    const allSizes = data.data
+      .map(item => item.size)
+      .filter(sizeArray => sizeArray && sizeArray.length > 0) // Фильтруем непустые массивы
+      .flat(); // Разворачиваем все массивы в один плоский массив
+
+    const uniqueSizes = Array.from(new Set(allSizes)).sort((a, b) => a - b);
+    const sizesArray = uniqueSizes.map(size => ({
+      name: size.toString(),
+      value: size, // Используем сам размер как значение
+    }));
+
+    updateWaitData({
+      allBrands: brandsArray,
+      allSizes: sizesArray,
+    });
+  }, [data.data]);
 
   const setFilterData = () => {
     const updatedData = {
@@ -48,31 +90,8 @@ export function DataProvider({ children }: DataProviderProps) {
     updateData(updatedData);
   };
   // TODO: дописать функцию фильтрации по брендам и размерам
-  // на данный момент сохраняются данные не туда и фильтрация не работает
-  // нужно временное хранилище и дальнейшая реализация этот код только перебирает данные и сохраняет их
 
-  // useEffect(() => {
-  //   // Бренды - убираем пустые
-  //   const allBrands = data.data.map(item => item.brand).filter(brand => brand);
-  //   const uniqueBrands = Array.from(new Set(allBrands));
-  //   const brandsArray = uniqueBrands.map((brand, index) => ({
-  //     name: brand,
-  //     value: index + 1,
-  //   }));
-
-  //   // Размеры - убираем пустые
-  //   const allSizes = data.data.map(item => item.size).filter(size => size);
-  //   const uniqueSizes = Array.from(new Set(allSizes)).sort((a, b) => a - b);
-  //   const sizesArray = uniqueSizes.map((size, index) => ({
-  //     name: size.toString(),
-  //     value: index + 1,
-  //   }));
-
-  //   updateWaitData({
-  //     brands: brandsArray,
-  //     sizes: sizesArray,
-  //   });
-  // }, [data.data]);
+  // нужно адаптировать функции под универсальность. кроссовки одежда аксессуры. сейчас все работает напрямую с dataShoes
 
   const updateData = (newData: Partial<DataProvider>) => {
     setData(prev => ({ ...prev, ...newData }));
@@ -80,6 +99,10 @@ export function DataProvider({ children }: DataProviderProps) {
 
   const updateWaitData = (newData: Partial<DataProvider>) => {
     setWaitData(prev => ({ ...prev, ...newData }));
+  };
+
+    const updateOrder = (newOrder: Partial<order>) => {
+    setOrder(prev => ({ ...prev, ...newOrder }));
   };
 
   const resetData = () => {
@@ -92,17 +115,24 @@ export function DataProvider({ children }: DataProviderProps) {
     updateWaitData({
       minPrice: min,
       maxPrice: max,
+      sizes: [],
+      brands: [],
     });
   };
 
   const value: DataContextType = {
     data,
     waitData,
+    order,
     setData,
     updateData,
     updateWaitData,
+    updateOrder,
     setFilterData,
     resetData,
+    page,
+    setPage,
+    setOrder
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
