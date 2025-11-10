@@ -10,12 +10,13 @@ export default function CardOrder() {
   const [address, setAddress] = useState<string>('');
   const [contacts, setContacts] = useState<string>('');
   const [number, setNumber] = useState<string>('');
-
-  useEffect(() => {
-    console.log('Данные отправлены', { order });
-  }, [order]);
-
-  console.log(size, howBuy, address, contacts, number);
+  const [errors, setErrors] = useState({
+    size: true,
+    howBuy: true,
+    address: true,
+    contacts: true,
+    number: true,
+  });
 
   const priceDelivery = 400;
 
@@ -23,14 +24,31 @@ export default function CardOrder() {
     setSize(size);
   };
 
+  const orderValidation = () => {
+    const hasSizes = order.product.size && order.product.size.length > 0;
+    const newErrors = {
+      size: !hasSizes || (hasSizes && size !== 0 && size !== ''),
+      howBuy: howBuy !== '',
+      address: address !== '',
+      contacts: contacts !== '',
+      number: number !== '' && number.length >= 8,
+    };
+    setErrors(newErrors);
+    return newErrors;
+  };
+
   const handleClickApply = () => {
-    updateOrder({
-      size: size,
-      receive: howBuy,
-      point: address,
-      name: contacts,
-      number: number,
-    });
+    const validationResult = orderValidation();
+
+    if (Object.values(validationResult).every(Boolean)) {
+      updateOrder({
+        size: size,
+        receive: howBuy,
+        point: address,
+        name: contacts,
+        number: number,
+      });
+    }
   };
 
   const product: IProduct = order.product;
@@ -69,21 +87,23 @@ export default function CardOrder() {
             </span>
           </div>
         </div>
-        <div className={style.sizeContainer}>
-          {product.size.map(item => (
-            <button
-              key={item}
-              className={`${style.size} ${
-                size === item ? style.sizeActive : ''
-              }`}
-              onClick={() => {
-                handleClickSize(item);
-              }}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
+        {product.size?.length > 0 && (
+          <div className={style.sizeContainer}>
+            {product.size?.map(item => (
+              <button
+                key={item}
+                className={`${style.size} ${
+                  size === item ? style.sizeActive : ''
+                } ${errors.size === false ? style.errorMesseg : ''}`}
+                onClick={() => {
+                  handleClickSize(item);
+                }}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        )}
         <div className={style.buyContainer}>
           <h3 className={`${style.textStyle} ${style.buyTitle}`}>
             Как получать
@@ -91,7 +111,8 @@ export default function CardOrder() {
           <button
             className={`${style.textStyle} ${style.buyButton} ${
               howBuy === 'В пункте выдачи' ? style.buyButtonActive : ''
-            }`}
+            }
+            ${errors.howBuy === false ? style.errorMesseg : ''}`}
             onClick={() => {
               setHowBuy('В пункте выдачи');
             }}
@@ -101,7 +122,8 @@ export default function CardOrder() {
           <button
             className={`${style.textStyle} ${style.buyButton} ${
               howBuy === 'В магазине' ? style.buyButtonActive : ''
-            }`}
+            }
+            ${errors.howBuy === false ? style.errorMesseg : ''}`}
             onClick={() => {
               setHowBuy('В магазине');
             }}
@@ -111,7 +133,7 @@ export default function CardOrder() {
           <input
             type="text"
             placeholder="Адрес пункта выдачи"
-            className={style.inputText}
+            className={`${style.inputText} ${errors.address === false ? style.errorMesseg : ''}`}
             value={address}
             onChange={e => {
               setAddress(e.target.value);
@@ -125,7 +147,7 @@ export default function CardOrder() {
           <input
             type="text"
             placeholder="Имя и фамилия"
-            className={style.inputText}
+            className={`${style.inputText} ${errors.contacts === false ? style.errorMesseg : ''}`}
             value={contacts}
             onChange={e => {
               setContacts(e.target.value);
@@ -134,7 +156,7 @@ export default function CardOrder() {
           <input
             type="text"
             placeholder="+7 (•••) •••-••-••"
-            className={style.inputText}
+            className={`${style.inputText} ${errors.number === false ? style.errorMesseg : ''}`}
             value={number}
             onChange={e => {
               setNumber(e.target.value);

@@ -139,6 +139,13 @@
   inline-size: 100%;
 }
 
+@media (max-width: 1640px) {
+  .infoImg {
+    block-size: 100%;
+    inline-size: 100%;
+  }
+}
+
 @media (max-width: 1280px) {
   .infoSection {
     padding: 30px;
@@ -158,9 +165,19 @@
   }
 }
 
-@media (max-width: 1640px) {
-  .infoImg {
-    block-size: 100%;
-    inline-size: 100%;
+@media(max-width: 1080px) {
+  .aboutSection {
+    grid-auto-flow: row;
+  }
+
+  .carouselContent {
+    padding: 0;
+    margin-block: 50px;
+  }
+  
+  .infoSection {
+    padding: 20px;
+    margin-block-end: 50px;
+    column-gap: 0;
   }
 }

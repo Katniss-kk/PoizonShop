@@ -1,0 +1,62 @@
+.deliveryContainer {
+  padding-inline: max(20px, 25vw);
+padding-inline: min(480px, 25vw);
+  padding-block-start: 73px;
+  padding-block-end: 45px;
+}
+
+.textStyle {
+  font-family: var(--font-second);
+  color: var(--color-main-text);
+}
+
+.titleOwner {
+  font-weight: 400;
+  font-size: 50px;
+  text-align: start;
+  margin-block-end: 60px;
+}
+
+.sectionTitle {
+  font-weight: 500;
+  font-size: 30px;
+  margin-block-end: 32px;
+}
+
+.title {
+  text-align: center;
+}
+
+.section {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 28px;
+  margin-block: 45px;
+}
+
+.mainText {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.separator {
+    inline-size: 121px;
+    justify-self: center;
+}
+
+.textSpan {
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+}
+
+.textSpanBold {
+  font-weight: 700;
+}
+
+.personalBlock {
+  margin-block-end: 45px;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 45px;
+}

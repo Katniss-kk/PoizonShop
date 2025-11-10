@@ -2,7 +2,7 @@ import style from './CardCarousel.module.css';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import { CardItem } from '../..';
 
 import type { CardCarouselProps } from '../../../types';
@@ -17,8 +17,24 @@ export default function CardCarousel({
 }: CardCarouselProps) {
   const swiperRef = useRef<SwiperType>();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
-  const totalPages = Math.ceil(items.length / itemsPerPage);
+  
+  // Функция для расчета количества карточек и страниц
+  const getSwiperConfig = () => {
+    const width = window.innerWidth;
+    
+    if (width < 768) {
+      return { slidesPerView: 1, slidesPerGroup: 1, itemsPerPage: 1 };
+    } else if (width < 1024) {
+      return { slidesPerView: 2, slidesPerGroup: 2, itemsPerPage: 2 };
+    } else if (width < 1280) {
+      return { slidesPerView: 3, slidesPerGroup: 3, itemsPerPage: 3 };
+    } else {
+      return { slidesPerView: 4, slidesPerGroup: 4, itemsPerPage: 4 };
+    }
+  };
+
+  const config = getSwiperConfig();
+  const totalPages = Math.ceil(items.length / config.itemsPerPage);
 
   return (
     <div className={style.customSwiperContainer}>
@@ -30,21 +46,44 @@ export default function CardCarousel({
           const snapIndex = swiper.snapIndex;
           const newPage =
             Math.floor(
-              snapIndex / (itemsPerPage / swiper.params.slidesPerGroup)
+              snapIndex / (config.itemsPerPage / swiper.params.slidesPerGroup!)
             ) + 1;
           setCurrentPage(Math.min(newPage, totalPages));
         }}
         modules={[Navigation, Autoplay]}
         spaceBetween={20}
-        slidesPerView={itemsPerPage}
-        slidesPerGroup={itemsPerPage}
+        slidesPerView={config.slidesPerView}
+        slidesPerGroup={config.slidesPerGroup}
         autoplay={
           autoPlay ? { delay: 3000, disableOnInteraction: false } : false
         }
         loop={false}
-        // breakpoints={{
-        //   1280: { slidesPerView: 3, slidesPerGroup: 3 },
-        // }}
+        breakpoints={{
+          // Мобильные телефоны
+          320: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+            spaceBetween: 10
+          },
+          // Планшеты
+          768: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 15
+          },
+          // Ноутбуки
+          1024: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 20
+          },
+          // Десктоп
+          1280: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 20
+          }
+        }}
       >
         {items.map(item => (
           <SwiperSlide

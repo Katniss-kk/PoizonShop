@@ -2,16 +2,17 @@ import { useState, type ReactElement } from 'react';
 import type { IProduct } from '../../../types';
 import style from './cardSelected.module.css';
 import CardOrder from '../cardOrder/cardOrder';
+import { CardSelectedContent } from '../../../../constants/CardSelectedContent';
 
 import { useData } from '../../../hooks/dataProvider';
 
 import notFound from '../../../../../public/images/404.jpeg';
 
 export default function CardSelected({ item }: { item: IProduct }) {
-  const { updateOrder, setPage } = useData()
+  const { updateOrder, setPage } = useData();
   const [mainImage, setMainImage] = useState(item.img[0]);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [size, setSize] = useState<number>(0)
+  const [size, setSize] = useState<number>(0);
 
   const handleClickPrice = (e: React.MouseEvent<HTMLButtonElement>) => {
     const textButton = e.currentTarget.dataset.text;
@@ -20,105 +21,16 @@ export default function CardSelected({ item }: { item: IProduct }) {
   };
 
   const handleClickBuy = () => {
-    if (size !== 0) {
-      updateOrder({
-        product: item,
-        size: size
-      })
-      setPage(<CardOrder/>)
-      // открываем корзину
-    } else {
-      return
-    }
-  }
+    const hasSizes = item.size && item.size.length > 0;
 
-  const sectionContent = {
-    'ГАРАНТИЯ ЛУЧШЕЙ ЦЕНЫ': (
-      <div className={style.aboutTextContainer}>
-        <h3 className={`${style.textStyle} ${style.aboutText}`}>
-          Если вы нашли данную модель где-либо в наличии по более низкой цене —
-          пришлите нам ссылку на данную модель в другом магазине. Мы будем рады
-          предложить вам скидку, компенсирующую разницу в стоимости, и лучшую
-          цену относительно конкурентов. Обратите внимание, что акция
-          распространяется только на российские платформы.
-        </h3>
-      </div>
-    ),
-    'КАК ОПРЕДЕЛИТЬ РАЗМЕР?': (
-      <div className={style.aboutTextContainer}>
-        <h3 className={`${style.textStyle} ${style.aboutText}`}>
-          <br />
-          1. Встаньте на лист бумаги так, чтобы пятка слегка касалась стены
-          сзади.
-          <br />
-          2. Отметьте на бумаге конец самого длинного пальца и измерьте
-          расстояние от стены до отметки.
-          <br />
-          3. Сделайте то же самое для другой ноги и сравните измерения с нашей
-          таблицей размеров, чтобы определить правильный размер.
-        </h3>
-      </div>
-    ),
-    'СПОСОБЫ ДОСТАВКИ И ОПЛАТЫ': (
-      <div className={style.aboutTextContainer}>
-        <div>
-          <h2 className={`${style.textStyle} ${style.aboutTextTitle}`}>
-            Доставка
-          </h2>
-          <h3 className={`${style.textStyle} ${style.aboutText}`}>
-            Мы осуществляем адресную доставку по всей России. Стоимость и сроки
-            доставки рассчитываются индивидуально на этапе оформления заказа.
-            Для Москвы и Московской области доступна примерка, оплата при
-            получении и самовывоз из наших магазинов:
-            <br />
-            1) Москва, Кутузовский проспект 48, Галереи "Времена Года", 3 этаж.
-            <br />
-            2)Московская область, деревня Воронки, 1 к. 4. ТЦ Архангельское
-            Аутлет, бутик Sortage. Подробнее об условиях доставки можно узнать
-            на этой странице.
-          </h3>
-        </div>
-        <div>
-          <h2 className={`${style.textStyle} ${style.aboutTextTitle}`}>
-            Оплата
-          </h2>
-          <h3 className={`${style.textStyle} ${style.aboutText}`}>
-            1) в Тинькофф Кассе путем выставления счёта на указанный адрес
-            электронной почты. Доступные способы оплаты: банковские карты Visa,
-            Mastercard, МИР, Union Pay; Tinkoff Pay, Yandex Pay, СБП;
-          </h3>
-          <h3 className={`${style.textStyle} ${style.aboutText}`}>
-            2) для товаров из категории «В наличии» доступна оплата курьеру
-            наличными или банковские карты в мобильном терминале при получении;
-          </h3>
-          <h3 className={`${style.textStyle} ${style.aboutText}`}>
-            3) оплата переводом по реквизитам.
-          </h3>
-        </div>
-      </div>
-    ),
-    'ОБМЕН И ВОЗВРАТ': (
-      <div className={style.aboutTextContainer}>
-        <h3 className={`${style.textStyle} ${style.aboutText}`}>
-          Мы предлагаем бесплатный обмен и полный возврат для всех заказов при
-          следующих условиях:
-        </h3>
-        <h3 className={`${style.textStyle} ${style.aboutText}`}>
-          <br />
-          1) товар не был в употреблении (стиран, ношен);
-          <br />
-          2) сохранены его товарный вид, потребительские свойства;
-          <br />
-          3) пломбы, фабричные ярлыки, в том числе КИЗ
-          (контрольно-идентификационный знак) на товаре или его упаковке (в
-          зависимости от того, что применимо) должны быть целыми, не мятыми и не
-          повреждёнными.
-        </h3>
-        <h3 className={`${style.textStyle} ${style.aboutText}`}>
-          Больше информации можно найти на этой странице.
-        </h3>
-      </div>
-    ),
+    if (hasSizes && size === 0) {
+      return;
+    }
+    updateOrder({
+      product: item,
+      size: size,
+    });
+    setPage(<CardOrder />);
   };
 
   const selectedImage = (e: string) => {
@@ -187,13 +99,26 @@ export default function CardSelected({ item }: { item: IProduct }) {
             <hr />
           </div>
           <div className={style.sizesContainer}>
-            {item.size.map(item => (
-              <button key={item} className={`${style.sizeButton} ${size === item ? style.sizeButtonActive : ''}`} onClick={() => {(setSize(item))}}>
+            {item.size?.map(item => (
+              <button
+                key={item}
+                className={`${style.sizeButton} ${size === item ? style.sizeButtonActive : ''}`}
+                onClick={() => {
+                  setSize(item);
+                }}
+              >
                 EU {item}
               </button>
             ))}
           </div>
-          <button className={style.buttonBuy} onClick={() => {handleClickBuy()}}>Купить</button>
+          <button
+            className={style.buttonBuy}
+            onClick={() => {
+              handleClickBuy();
+            }}
+          >
+            Купить
+          </button>
           <div className={style.aboutContainer}>
             <div className={style.buttonContainer}>
               <button
@@ -233,7 +158,7 @@ export default function CardSelected({ item }: { item: IProduct }) {
                 </svg>
               </button>
               {activeSection === 'ГАРАНТИЯ ЛУЧШЕЙ ЦЕНЫ' &&
-                sectionContent['ГАРАНТИЯ ЛУЧШЕЙ ЦЕНЫ']}
+                CardSelectedContent['ГАРАНТИЯ ЛУЧШЕЙ ЦЕНЫ']}
             </div>
             <div className={style.buttonContainer}>
               <button
@@ -273,7 +198,7 @@ export default function CardSelected({ item }: { item: IProduct }) {
                 </svg>
               </button>
               {activeSection === 'КАК ОПРЕДЕЛИТЬ РАЗМЕР?' &&
-                sectionContent['КАК ОПРЕДЕЛИТЬ РАЗМЕР?']}
+                CardSelectedContent['КАК ОПРЕДЕЛИТЬ РАЗМЕР?']}
             </div>
             <div className={style.buttonContainer}>
               <button
@@ -312,7 +237,7 @@ export default function CardSelected({ item }: { item: IProduct }) {
                 </svg>
               </button>
               {activeSection === 'СПОСОБЫ ДОСТАВКИ И ОПЛАТЫ' &&
-                sectionContent['СПОСОБЫ ДОСТАВКИ И ОПЛАТЫ']}
+                CardSelectedContent['СПОСОБЫ ДОСТАВКИ И ОПЛАТЫ']}
             </div>
             <div className={style.buttonContainer}>
               <button
@@ -356,7 +281,7 @@ export default function CardSelected({ item }: { item: IProduct }) {
                 </svg>
               </button>
               {activeSection === 'ОБМЕН И ВОЗВРАТ' &&
-                sectionContent['ОБМЕН И ВОЗВРАТ']}
+                CardSelectedContent['ОБМЕН И ВОЗВРАТ']}
             </div>
           </div>
         </div>

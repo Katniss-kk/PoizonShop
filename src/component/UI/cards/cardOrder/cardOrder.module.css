@@ -163,3 +163,7 @@
     border-radius: 20px;
     background: radial-gradient(circle, #F8095F, #FF7168);
 }
+
+.errorMesseg {
+  border: 1px solid red;
+}

@@ -23,6 +23,17 @@ footer {
 
 @media(max-width: 1280px) {
     footer {
-        padding: 10px
+        padding-inline-start: 30px;
+        padding-inline-end: 10px;
+    }
+}
+
+@media(max-width: 1080px) {
+    footer {
+        padding: 10px;
+        column-gap: 20px;
+    }
+    .botButton {
+        margin-block-end: 20px;
     }
 }

@@ -57,19 +57,30 @@
   block-size: 258px;
 }
 
-@media(max-width: 1280px) {
-  .containerSection {
-    gap: 0;
-    padding: 0;
-    justify-items: start;
+@media(max-width: 1640px) {
+  .productCustomImage {
+    inline-size: 350px;
+    block-size: 200px;
   }
+
   .containerItem {
+    inline-size: 350px;
+    block-size: 336px;
     padding: 0;
-    inline-size: 0;
+  }
+  .containerSection {
+    padding-inline: 75px;
   }
 }
 
-@media(max-width: 1640px) {
+@media(max-width: 1280px) {
+  .containerSection {
+    padding: 0;
+    gap: 30px;
+  }
+}
+
+@media(max-width: 1080px) {
   .containerSection {
     gap: 0;
   }

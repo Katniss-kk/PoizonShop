@@ -23,7 +23,7 @@ export interface IProduct {
   title: string;
   img: string[];
   brand: string;
-  size: string[] | number[];
+  size?: string[] | number[] | undefined;
   price: string;
 }
 

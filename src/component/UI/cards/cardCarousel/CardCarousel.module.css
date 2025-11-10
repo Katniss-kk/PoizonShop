@@ -19,13 +19,6 @@ div .productCard {
     column-gap: 42px;
 }
 
-/* .currentPage {
-    font-family: var(--font-second);
-    font-weight: 400;
-    font-size: 16px;
-    color: var(--title-text-color);
-} */
-
 .paginationBtn {
     border: none;
     inline-size: 20px;
