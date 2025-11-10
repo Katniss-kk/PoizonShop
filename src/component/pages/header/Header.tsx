@@ -10,8 +10,10 @@ import { useData } from '../../hooks/dataProvider';
 export default function Header() {
   return (
     <header>
-      <Logo className={style.logo} />
-      <TopMenuButton />
+      <div className={style.logoMenuContainer}>
+        <Logo className={style.logo} />
+        <TopMenuButton />
+      </div>
       <div className={style.headerContainer}>
         <BasketButton />
         <TelegramButton
