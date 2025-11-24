@@ -2,16 +2,17 @@
   display: grid;
   grid-auto-flow: column;
   background-color: var(--bg-about);
-  padding-inline-start: 203px;
-  padding-inline-end: 212px;
+  padding-inline: 212px;
 }
 
 .aboutText {
   display: grid;
+  justify-self: center;
   justify-content: flex-start;
   row-gap: 23px;
   margin-block-start: 76px;
   margin-block-end: 111px;
+  max-inline-size: 585px;
 }
 
 .aboutTitle {
@@ -43,6 +44,8 @@
 
 .aboutImg {
   margin-block: 23px;
+  inline-size: 100%;
+  align-self: center;
 }
 
 .infoSection {
@@ -61,8 +64,8 @@
   background-color: var(--bg-price-container);
   padding-inline: 94px;
   padding-block: 67px;
-  inline-size: 540px;
-  block-size: max-content;
+  inline-size: 100%;
+  block-size: 100%;
   border-radius: 50px;
 }
 
@@ -137,13 +140,7 @@
 
 .infoImg {
   inline-size: 100%;
-}
-
-@media (max-width: 1640px) {
-  .infoImg {
-    block-size: 100%;
-    inline-size: 100%;
-  }
+  block-size: 100%;
 }
 
 @media (max-width: 1280px) {
@@ -152,16 +149,20 @@
   }
 
   .priceContainer {
-    block-size: 417px;
     row-gap: 10px;
-  }
-  .infoImg {
-    block-size: 100%;
-    inline-size: 100%;
   }
   .carouselContent {
     padding-inline: 30px;
     padding-block: 30px;
+  }
+}
+
+@media (max-width: 1441px) {
+  .aboutSection {
+    padding-inline: 170px;
+  }
+  .aboutText {
+    max-inline-size: 350px;
   }
 }
 
@@ -184,12 +185,9 @@
 
 @media (max-width: 1024px) {
   .infoSection {
-    padding-inline: 52px;
+    padding-inline: 20px;
     grid-auto-flow: row;
     row-gap: 43px;
-  }
-  .priceContainer {
-    inline-size: 100%;
   }
 }
 
@@ -199,32 +197,21 @@
   }
   .priceContainer {
     row-gap: 68px;
-    block-size: max-content;
-  }
-}
-
-@media(max-width: 426px) {
-  .aboutSection {
-    padding-inline: 26px;
-  }
-  .aboutImg {
-    inline-size: 375px;
-    max-block-size: 100%;
-  }
-  .infoImg {
-    inline-size: 320px;
-  }
-  .priceContainer {
-    inline-size: 320px;
     padding-block: 40px;
     padding-inline: 20px;
   }
+  .infoSection {
+    padding-inline: 0px;
+  }
 }
 
-@media(max-width: 376px) {
-  .aboutImg {
-    inline-size: 330px;
+@media (max-width: 426px) {
+  .aboutSection {
+    padding-inline: 26px;
   }
+}
+
+@media (max-width: 376px) {
   .aboutSection {
     padding-inline: 16px;
   }
@@ -246,14 +233,7 @@
   .aboutTitle {
     font-size: 35px;
   }
-  .aboutImg {
-    inline-size: 300px;
-  }
   .priceContainer {
-    inline-size: 300px;
     padding-inline: 10px;
-  }
-  .infoImg {
-    inline-size: 300px;
   }
 }

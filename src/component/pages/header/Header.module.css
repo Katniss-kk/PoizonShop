@@ -71,23 +71,27 @@ header {
   header {
     padding-inline: 0;
   }
-  .menu {
-    column-gap: 50px;
-  }
-}
-
-@media (max-width: 1080px) {
   .logo {
-    margin-inline-end: 35px;
+    margin-inline-end: 15%px;
   }
   .menu {
     column-gap: 20px;
+    justify-self: center;
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1020px) {
+  header {
+    padding-inline: 50px;
+  }
   .logo {
-    margin-inline-end: 15px;
+    margin: 0;
+  }
+  .menu {
+    display: none;
+  }
+  .headerContainer .topButton {
+    display: none;
   }
 }
 

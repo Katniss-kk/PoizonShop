@@ -3,7 +3,7 @@
   fill: var(--button-svg-color);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .buttonSvg {
     display: block;
     margin-block-end: 5px;

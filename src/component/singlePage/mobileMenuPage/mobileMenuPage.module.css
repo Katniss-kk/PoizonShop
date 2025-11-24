@@ -1,28 +1,28 @@
 .page {
-    padding-block-start: 70px;
-    padding-block-end: 295px;
-    padding-inline: 49px;
-    display: grid;
-    justify-items: center;
+  padding-block-start: 70px;
+  padding-block-end: 295px;
+  padding-inline: 49px;
+  display: grid;
+  justify-items: center;
 }
 
 .menu {
-    display: grid;
-    grid-auto-flow: row;
-    justify-items: center;
-    row-gap: 55px;
+  display: grid;
+  grid-auto-flow: row;
+  justify-items: center;
+  row-gap: 55px;
 }
 
 .menuButton {
-    inline-size: max-content;
-    font-family: var(--font-second);
-    font-weight: 600;
-    font-size: 20px;
-    text-align: center;
-    color: var(--color-main-text);
-    background-color: transparent;
-    border: none;
-    text-decoration: none;
+  inline-size: max-content;
+  font-family: var(--font-second);
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  color: var(--color-main-text);
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
 }
 
 .menuButton:hover {
