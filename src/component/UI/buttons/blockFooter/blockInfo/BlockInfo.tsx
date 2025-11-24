@@ -6,19 +6,19 @@ export default function BlockInfo() {
     <div className={style.helpContainer}>
       <h5 className={`${style.text} ${style.title}`}>Политика и условия</h5>
       <Link
-        to={'PoizonShop/return'}
+        to={'/return'}
         className={`${style.text} ${style.helpButton}`}
       >
         Обмен и возврат
       </Link>
       <Link
-        to={'PoizonShop/personal'}
+        to={'/personal'}
         className={`${style.text} ${style.helpButton}`}
       >
         Политика конфиденциальности
       </Link>
       <Link
-        to={'PoizonShop/conditions'}
+        to={'/conditions'}
         className={`${style.text} ${style.helpButton}`}
       >
         Условия предоставления услуг

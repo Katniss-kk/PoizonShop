@@ -15,7 +15,8 @@ import {
 import store from './service/store';
 import { Provider } from 'react-redux';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// МЕНЯЕМ BrowserRouter на HashRouter
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from './service/store';
 import { fetchProductsThunk } from './service/slices/productsSlice';
@@ -46,9 +47,9 @@ function AppContent() {
     <>
       <Header />
       <Routes>
-        <Route path="PoizonShop/" element={<MainPage />} />
+        <Route path="/" element={<MainPage />} />
         <Route
-          path="/PoizonShop/cloth"
+          path="/cloth"
           element={
             <PageItems
               items={productsCloth}
@@ -59,7 +60,7 @@ function AppContent() {
           }
         />
         <Route
-          path="/PoizonShop/shoes"
+          path="/shoes"
           element={
             <PageItems
               items={productsShoes}
@@ -70,7 +71,7 @@ function AppContent() {
           }
         />
         <Route
-          path="/PoizonShop/accessories"
+          path="/accessories"
           element={
             <PageItems
               items={productsAcs}
@@ -80,17 +81,14 @@ function AppContent() {
             />
           }
         />
-        <Route
-          path="PoizonShop/product/:productTitle"
-          element={<CardSelected />}
-        />
-        <Route path="/PoizonShop/mobilemenu" element={<MobileMenuPage />} />
-        <Route path="/PoizonShop/order" element={<CardOrder />} />
-        <Route path="PoizonShop/questions" element={<QuestionsPage />} />
-        <Route path="PoizonShop/delivery" element={<DeliveryPage />} />
-        <Route path="PoizonShop/return" element={<ReturnPage />} />
-        <Route path="PoizonShop/personal" element={<PersonalDataPage />} />
-        <Route path="PoizonShop/conditions" element={<ConditionsPage />} />
+        <Route path="/product/:productTitle" element={<CardSelected />} />
+        <Route path="/mobilemenu" element={<MobileMenuPage />} />
+        <Route path="/order" element={<CardOrder />} />
+        <Route path="/questions" element={<QuestionsPage />} />
+        <Route path="/delivery" element={<DeliveryPage />} />
+        <Route path="/return" element={<ReturnPage />} />
+        <Route path="/personal" element={<PersonalDataPage />} />
+        <Route path="/conditions" element={<ConditionsPage />} />
       </Routes>
       <Footer />
     </>

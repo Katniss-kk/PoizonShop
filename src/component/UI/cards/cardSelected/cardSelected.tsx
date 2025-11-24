@@ -80,7 +80,7 @@ export default function CardSelected() {
       return;
     } else {
       dispatch(setProduct(item));
-      navigate('/PoizonShop/order');
+      navigate('/order');
     }
   };
 

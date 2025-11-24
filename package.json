@@ -1,8 +1,9 @@
 {
-  "name": "poizonshop",
+  "name": "your-app",
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "homepage": "https://yourusername.github.io/PoizonShop",
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",

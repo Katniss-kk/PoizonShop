@@ -70,7 +70,7 @@ export default function CardOrder() {
 
   useEffect(() => {
     if (!product) {
-      navigate('/PoizonShop/');
+      navigate('/');
     }
   }, [product, navigate]);
 
@@ -79,7 +79,7 @@ export default function CardOrder() {
       .unwrap()
       .then(result => {
         if (result) {
-          navigate('/PoizonShop/');
+          navigate('/');
         }
       })
       .catch(error => {

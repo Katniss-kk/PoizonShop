@@ -4,15 +4,15 @@ import type { UserMenu } from '../../../types';
 export default function UserMenu({ style }: UserMenu) {
   return (
     <menu className={style.menu}>
-      <Link to="/PoizonShop/cloth" className={style.menuButton}>
+      <Link to="/cloth" className={style.menuButton}>
         Одежда
       </Link>
 
-      <Link to="/PoizonShop/shoes" className={style.menuButton}>
+      <Link to="/shoes" className={style.menuButton}>
         Обувь
       </Link>
 
-      <Link to="/PoizonShop/accessories" className={style.menuButton}>
+      <Link to="/accessories" className={style.menuButton}>
         Аксессуары
       </Link>
 

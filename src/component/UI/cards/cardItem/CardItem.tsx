@@ -5,7 +5,6 @@ import { getProductByTitle } from '../../../../service/slices/productsSlice';
 import { useAppDispatch } from '../../../../service/store';
 
 export default function CardItem({ item, producCustomtImage }: CardOneItem) {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const createSlug = (name: string) => {
@@ -20,12 +19,11 @@ export default function CardItem({ item, producCustomtImage }: CardOneItem) {
   };
 
   const productSlug = createSlug(item.title);
-  const productLink = `/PoizonShop/product/${productSlug}`;
+  const productLink = `/product/${productSlug}`;
 
   return (
     <>
       {item.img && item.img[0] && (
-        // Оберните изображение в Link
         <Link
           to={productLink}
           onClick={() => dispatch(getProductByTitle(item))}

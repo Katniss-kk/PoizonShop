@@ -6,13 +6,13 @@ export default function BlockHelp() {
     <div className={style.helpContainer}>
       <h5 className={`${style.text} ${style.title}`}>Помощь</h5>
       <Link
-        to={'PoizonShop/questions'}
+        to={'/questions'}
         className={`${style.text} ${style.helpButton}`}
       >
         Частые вопросы
       </Link>
       <Link
-        to={'PoizonShop/delivery'}
+        to={'/delivery'}
         className={`${style.text} ${style.helpButton}`}
       >
         Доставка и самовывоз
