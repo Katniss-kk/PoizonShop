@@ -15,7 +15,6 @@ import {
 import store from './service/store';
 import { Provider } from 'react-redux';
 
-import { DataProvider } from './component/hooks/dataProvider';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from './service/store';
@@ -26,11 +25,9 @@ import { CardOrder, CardSelected } from './component/UI';
 function App() {
   return (
     <Provider store={store}>
-      <DataProvider>
-        <Router>
-          <AppContent />
-        </Router>
-      </DataProvider>
+      <Router>
+        <AppContent />
+      </Router>
     </Provider>
   );
 }
@@ -87,7 +84,7 @@ function AppContent() {
           path="PoizonShop/product/:productTitle"
           element={<CardSelected />}
         />
-        <Route path='/PoizonShop/mobilemenu' element={<MobileMenuPage />}/>
+        <Route path="/PoizonShop/mobilemenu" element={<MobileMenuPage />} />
         <Route path="/PoizonShop/order" element={<CardOrder />} />
         <Route path="PoizonShop/questions" element={<QuestionsPage />} />
         <Route path="PoizonShop/delivery" element={<DeliveryPage />} />

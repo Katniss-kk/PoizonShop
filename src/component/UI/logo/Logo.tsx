@@ -1,8 +1,5 @@
 import type { LogoProps } from '../../types';
 
-import { useData } from '../../hooks/dataProvider';
-import { Link } from 'react-router-dom';
-
 export default function Logo({ className = '' }: LogoProps) {
   return (
     <svg

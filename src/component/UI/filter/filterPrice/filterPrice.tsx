@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import style from './filterPrice.module.css';
-
-import { useData } from '../../../hooks/dataProvider';
 import {
   setMaxPriceData,
   setMinPriceData,
