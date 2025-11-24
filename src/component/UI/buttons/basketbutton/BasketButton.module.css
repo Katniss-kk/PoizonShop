@@ -1,11 +1,11 @@
 .basket {
-    fill: var(--basket-color);
-    inline-size: 66px;
-    block-size: 66px;
-    background-color: transparent;
-    border: none;
+  fill: var(--basket-color);
+  inline-size: 66px;
+  block-size: 66px;
+  background-color: transparent;
+  border: none;
 }
 
 .basket:hover {
-    fill: var(--color-main-text);
+  fill: var(--color-main-text);
 }

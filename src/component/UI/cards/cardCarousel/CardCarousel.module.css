@@ -38,3 +38,27 @@ button:disabled .buttonSvg {
     inline-size: 271px;
     block-size: 163px;
 }
+
+@media(max-width: 426px) {
+    div .productCard {
+        padding-inline: 10px;
+    }
+
+    .producCustomtImage {
+        inline-size: 183px;
+        block-size: 125px;
+    }
+
+}
+
+@media(max-width: 376px) {
+    div .productCard {
+        padding-inline: 5px;
+    }
+
+    .producCustomtImage {
+        inline-size: 150px;
+        block-size: 115px;
+    }
+
+}

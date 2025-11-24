@@ -47,3 +47,21 @@
   color: var(--color-main-text);
   cursor: pointer;
 }
+
+@media (max-width: 769px) {
+  .container {
+    max-block-size: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-inline-size: 150px;
+  }
+  .container::-webkit-scrollbar {
+    width: 1px;
+  }
+  .container::-webkit-scrollbar-thumb {
+    background: var(--bg-button-apply);
+    border-radius: 10px;
+    border: none;
+    opacity: 0.5;
+  }
+}

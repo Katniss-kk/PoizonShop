@@ -1,68 +1,78 @@
 import style from './filterBrandSize.module.css';
 import type { IBrandSize } from '../../../types';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../service/store';
+import {
+  setBrandsData,
+  setSizesData,
+} from '../../../../service/slices/filterProductsSlice';
+import { createSelector } from '@reduxjs/toolkit';
+import type { RootState } from '../../../../service/store';
 
-import { useData } from '../../../hooks/dataProvider';
+const selectSelectedBrands = createSelector(
+  (state: RootState) => state.filter.selectedBrands,
+  selectedBrands => selectedBrands || []
+);
+
+const selectSelectedSizes = createSelector(
+  (state: RootState) => state.filter.selectedSizes,
+  selectedSizes => selectedSizes || []
+);
 
 export default function FilterBrandSize({ allBrands, allSizes }: IBrandSize) {
-  const { waitData, updateWaitData } = useData();
+  const dispatch = useAppDispatch();
+
+  const selectedBrands = useAppSelector(selectSelectedBrands);
+  const selectedSizes = useAppSelector(selectSelectedSizes);
 
   const items = allBrands || allSizes || [];
 
-  const settings = e => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const itemName = e.target.name;
-    const isNumber = !isNaN(parseFloat(itemName)) && isFinite(itemName);
+    const isChecked = e.target.checked;
+    const isNumber = !isNaN(Number(itemName));
 
-    if (e.target.checked) {
-      if (isNumber) {
-        updateWaitData({
-          sizes: waitData.sizes.concat(itemName),
-        });
-      } else {
-        updateWaitData({
-          brands: waitData.brands.concat(itemName),
-        });
-      }
+    if (isNumber) {
+      // Для размеров
+      const newSizes = isChecked
+        ? [...selectedSizes, itemName]
+        : selectedSizes.filter(item => item !== itemName);
+
+      dispatch(setSizesData(newSizes));
     } else {
-      if (isNumber) {
-        updateWaitData({
-          sizes: waitData.sizes.filter((item) => item !== itemName),
-        });
-      } else {
-        updateWaitData({
-          brands: waitData.brands.filter((item) => item !== itemName),
-        });
-      }
+      // Для брендов
+      const newBrands = isChecked
+        ? [...selectedBrands, itemName]
+        : selectedBrands.filter(item => item !== itemName);
+
+      dispatch(setBrandsData(newBrands));
     }
   };
 
-  // Функция для определения checked состояния
-  const isChecked = (item) => {
-    const itemName = item.name;
-    const isNumber = !isNaN(parseFloat(itemName)) && isFinite(itemName);
-    
+  const isChecked = (item: string) => {
+    const isNumber = !isNaN(Number(item));
+
     if (isNumber) {
-      return waitData.sizes.includes(itemName);
+      return selectedSizes.includes(item);
     } else {
-      return waitData.brands.includes(itemName);
+      return selectedBrands.includes(item);
     }
   };
 
   return (
     <div className={style.container}>
       {items.map(item => (
-        <div key={item.value} className={style.brandItem}>
+        <div key={String(item)} className={style.brandItem}>
           <input
             type="checkbox"
-            id={item.name}
-            name={item.name}
-            value={item.value}
+            id={String(item)}
+            name={String(item)}
+            value={String(item)}
             className={style.checkbox}
-            onChange={settings}
-            checked={isChecked(item)}
+            onChange={handleCheckboxChange}
+            checked={isChecked(String(item))}
           />
-          <label htmlFor={item.name} className={style.label}>
-            {item.name}
+          <label htmlFor={String(item)} className={style.label}>
+            {String(item)}
           </label>
         </div>
       ))}

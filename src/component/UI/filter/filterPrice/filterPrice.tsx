@@ -1,105 +1,103 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import style from './filterPrice.module.css';
 
 import { useData } from '../../../hooks/dataProvider';
+import {
+  setMaxPriceData,
+  setMinPriceData,
+} from '../../../../service/slices/filterProductsSlice';
+import { useAppSelector, useAppDispatch } from '../../../../service/store';
 
 interface FilterPriceProps {
-  minPrice: number;
-  maxPrice: number;
-  onPriceChange?: (min: number, max: number) => void;
+  actualMinPrice: number;
+  actualMaxPrice: number;
 }
 
-export default function FilterPrice({ minPrice, maxPrice }: FilterPriceProps) {
-  const { updateData, data, updateWaitData, waitData } = useData();
-  const [minValue, setMinValue] = useState(minPrice);
-  const [maxValue, setMaxValue] = useState(maxPrice);
+export default function FilterPrice({
+  actualMinPrice,
+  actualMaxPrice,
+}: FilterPriceProps) {
+  const dispatch = useAppDispatch();
 
-  const setSelectedMin = (price: number) => {
-    updateWaitData({
-      minPrice: price,
-    });
-  };
+  const [minPriceTextState, setMinPriceTextState] = useState(actualMinPrice);
+  const [maxPriceTextState, setMaxPriceTextState] = useState(actualMaxPrice);
 
-  const setSelectedMax = (price: number) => {
-    updateWaitData({
-      maxPrice: price,
-    });
-  };
+  const selectedMinPrice = useAppSelector(state =>
+    Number(state.filter.selectedMinPrice)
+  );
+  const selectedMaxPrice = useAppSelector(state =>
+    Number(state.filter.selectedMaxPrice)
+  );
 
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Math.min(Number(e.target.value), data.maxPrice - 1);
-    setSelectedMin(value);
-    setMinValue(value);
+    dispatch(setMinPriceData(Number(e.target.value)));
+    setMinPriceTextState(Number(e.target.value));
   };
 
   const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Math.max(Number(e.target.value), data.minPrice + 1);
-    setSelectedMax(value);
-    setMaxValue(value);
+    dispatch(setMaxPriceData(Number(e.target.value)));
+    setMaxPriceTextState(Number(e.target.value));
   };
 
-  const minTextChange = () => {
-    if (minValue < minPrice) {
-      setSelectedMin(minPrice);
-      setMinValue(minPrice);
+  const handleMinTextChange = () => {
+    if (minPriceTextState < actualMinPrice) {
+      dispatch(setMinPriceData(actualMinPrice));
+      setMinPriceTextState(actualMinPrice);
+    } else if (minPriceTextState > actualMaxPrice) {
+      dispatch(setMinPriceData(actualMaxPrice - 1));
+      setMinPriceTextState(actualMaxPrice - 1);
+    } else {
+      dispatch(setMinPriceData(minPriceTextState));
     }
-    if (minValue > maxPrice) {
-      setSelectedMin(maxPrice - 1);
-      setMinValue(maxPrice - 1);
-    }
-    setSelectedMin(minValue);
   };
 
-  const maxTextChange = () => {
-    if (maxValue > maxPrice) {
-      setSelectedMax(maxPrice);
-      setMaxValue(maxPrice);
+  const handleMaxTextChange = () => {
+    if (maxPriceTextState > actualMaxPrice) {
+      dispatch(setMaxPriceData(actualMaxPrice));
+      setMaxPriceTextState(actualMaxPrice);
+    } else if (maxPriceTextState < actualMinPrice) {
+      dispatch(setMaxPriceData(actualMinPrice + 1));
+      setMaxPriceTextState(actualMinPrice + 1);
+    } else {
+      dispatch(setMaxPriceData(maxPriceTextState));
     }
-    if (maxValue < minPrice) {
-      setSelectedMax(minPrice + 1);
-      setMaxValue(minPrice + 1);
-    }
-    setSelectedMax(maxValue);
   };
 
   const minPercent =
-    maxPrice > minPrice
-      ? ((waitData.minPrice - minPrice) / (maxPrice - minPrice)) * 100
-      : 0;
-
+    ((selectedMinPrice - actualMinPrice) / (actualMaxPrice - actualMinPrice)) *
+    100;
   const maxPercent =
-    maxPrice > minPrice
-      ? ((waitData.maxPrice - minPrice) / (maxPrice - minPrice)) * 100
-      : 100;
+    ((selectedMaxPrice - actualMinPrice) / (actualMaxPrice - actualMinPrice)) *
+    100;
 
   const sliderStyle = {
-    background: `linear-gradient(to right, 
-      #E5E7EB 0%, 
-      #E5E7EB ${minPercent}%, 
-      #1C64F2 ${minPercent}%, 
-      #1C64F2 ${maxPercent}%, 
-      #E5E7EB ${maxPercent}%, 
+    background: `linear-gradient(to right,
+      #E5E7EB 0%,
+      #E5E7EB ${minPercent}%,
+      #1C64F2 ${minPercent}%,
+      #1C64F2 ${maxPercent}%,
+      #E5E7EB ${maxPercent}%,
       #E5E7EB 100%
     )`,
   };
 
   return (
     <div className={style.content}>
-      <h3 className={style.text}>Цена</h3>
+      <h3 className={`${style.text} ${style.textPrice}`}>Цена</h3>
       <div className={style.slider} style={sliderStyle}>
         <input
           type="range"
-          min={minPrice}
-          max={maxPrice}
-          value={waitData.minPrice}
+          min={actualMinPrice}
+          max={actualMaxPrice}
+          value={selectedMinPrice}
           onChange={handleMinChange}
           className={`${style.thumb} ${style.thumbLeft}`}
         />
         <input
           type="range"
-          min={minPrice}
-          max={maxPrice}
-          value={waitData.maxPrice}
+          min={actualMinPrice}
+          max={actualMaxPrice}
+          value={selectedMaxPrice}
           onChange={handleMaxChange}
           className={`${style.thumb} ${style.thumbRight}`}
         />
@@ -112,13 +110,13 @@ export default function FilterPrice({ minPrice, maxPrice }: FilterPriceProps) {
             className={`${style.input} ${style.text}`}
             inputMode="numeric"
             pattern="[0-9]*"
-            value={minValue}
+            value={minPriceTextState}
             onChange={e => {
               let value = e.target.value;
               value = value.replace(/[^\d]/g, '');
-              setMinValue(Number(value));
+              setMinPriceTextState(Number(value));
             }}
-            onBlur={minTextChange}
+            onBlur={() => handleMinTextChange()}
           />
         </div>
         <div className={style.container}>
@@ -128,13 +126,13 @@ export default function FilterPrice({ minPrice, maxPrice }: FilterPriceProps) {
             className={`${style.input} ${style.text}`}
             inputMode="numeric"
             pattern="[0-9]*"
-            value={maxValue}
+            value={maxPriceTextState}
             onChange={e => {
               let value = e.target.value;
               value = value.replace(/[^\d]/g, '');
-              setMaxValue(Number(value));
+              setMaxPriceTextState(Number(value));
             }}
-            onBlur={maxTextChange}
+            onBlur={() => handleMaxTextChange()}
           />
         </div>
       </div>

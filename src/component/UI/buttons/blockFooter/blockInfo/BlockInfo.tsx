@@ -1,40 +1,28 @@
 import style from '../BlockFooter.module.css';
-import { useData } from '../../../../hooks/dataProvider';
-import {
-  ReturnPage,
-  PersonalDataPage,
-  ConditionsPage,
-} from '../../../../singlePage';
+import { Link } from 'react-router-dom';
 
 export default function BlockInfo() {
-  const { setPage } = useData();
   return (
     <div className={style.helpContainer}>
       <h5 className={`${style.text} ${style.title}`}>Политика и условия</h5>
-      <button
+      <Link
+        to={'PoizonShop/return'}
         className={`${style.text} ${style.helpButton}`}
-        onClick={() => {
-          setPage(<ReturnPage />);
-        }}
       >
         Обмен и возврат
-      </button>
-      <button
+      </Link>
+      <Link
+        to={'PoizonShop/personal'}
         className={`${style.text} ${style.helpButton}`}
-        onClick={() => {
-          setPage(<PersonalDataPage />);
-        }}
       >
         Политика конфиденциальности
-      </button>
-      <button
+      </Link>
+      <Link
+        to={'PoizonShop/conditions'}
         className={`${style.text} ${style.helpButton}`}
-        onClick={() => {
-          setPage(<ConditionsPage />);
-        }}
       >
         Условия предоставления услуг
-      </button>
+      </Link>
     </div>
   );
 }

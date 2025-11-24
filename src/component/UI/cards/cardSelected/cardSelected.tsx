@@ -1,36 +1,87 @@
-import { useState, type ReactElement } from 'react';
+import { useEffect, useState, type ReactElement } from 'react';
 import type { IProduct } from '../../../types';
 import style from './cardSelected.module.css';
 import CardOrder from '../cardOrder/cardOrder';
 import { CardSelectedContent } from '../../../../constants/CardSelectedContent';
 
-import { useData } from '../../../hooks/dataProvider';
-
 import notFound from '../../../../../public/images/404.jpeg';
 
-export default function CardSelected({ item }: { item: IProduct }) {
-  const { updateOrder, setPage } = useData();
-  const [mainImage, setMainImage] = useState(item.img[0]);
+import { useAppDispatch, useAppSelector } from '../../../../service/store';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  setProduct,
+  setSizeState,
+} from '../../../../service/slices/orderSlice';
+
+export default function CardSelected() {
+  const { productTitle } = useParams<{ productTitle: string }>();
+  const products = useAppSelector(state => state.products.products);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [item, setItem] = useState<IProduct | null>(null);
+  const [mainImage, setMainImage] = useState('');
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [size, setSize] = useState<number>(0);
 
-  const handleClickPrice = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const textButton = e.currentTarget.dataset.text;
+  useEffect(() => {
+    dispatch(setSizeState(Number(size)));
+  }, [size]);
 
+  useEffect(() => {
+    if (products.length > 0 && productTitle) {
+      const foundItem = products.find(product => {
+        const productSlug = product.title
+          .toLowerCase()
+          .trim()
+          .replace(/\s+/g, '-')
+          .replace(/[^\w\u0400-\u04FF\-]+/g, '')
+          .replace(/\-\-+/g, '-')
+          .replace(/^-+/, '')
+          .replace(/-+$/, '');
+
+        const decodedSlug = decodeURIComponent(productTitle || '');
+        return productSlug === decodedSlug;
+      });
+
+      if (foundItem) {
+        const fixedItem = {
+          ...foundItem,
+          img: foundItem.img.map(imgPath =>
+            imgPath.startsWith('./')
+              ? `/PoizonShop${imgPath.substring(1)}`
+              : `/PoizonShop${imgPath}`
+          ),
+        };
+        setItem(fixedItem);
+        setMainImage(fixedItem.img[0]);
+      } else {
+        setItem(null);
+      }
+    }
+  }, [products, productTitle]);
+
+  if (!item) {
+    return (
+      <div>
+        <h1 style={{ textAlign: 'center', margin: '50px' }}>Загрузка...</h1>
+      </div>
+    );
+  }
+
+  const handleClickButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const textButton = e.currentTarget.dataset.text;
     setActiveSection(activeSection === textButton ? null : textButton || null);
   };
 
   const handleClickBuy = () => {
     const hasSizes = item.size && item.size.length > 0;
-
     if (hasSizes && size === 0) {
       return;
+    } else {
+      dispatch(setProduct(item));
+      navigate('/PoizonShop/order');
     }
-    updateOrder({
-      product: item,
-      size: size,
-    });
-    setPage(<CardOrder />);
   };
 
   const selectedImage = (e: string) => {
@@ -104,7 +155,7 @@ export default function CardSelected({ item }: { item: IProduct }) {
                 key={item}
                 className={`${style.sizeButton} ${size === item ? style.sizeButtonActive : ''}`}
                 onClick={() => {
-                  setSize(item);
+                  setSize(Number(item));
                 }}
               >
                 EU {item}
@@ -125,7 +176,7 @@ export default function CardSelected({ item }: { item: IProduct }) {
                 className={`${style.about} ${style.textStyle}`}
                 data-text="ГАРАНТИЯ ЛУЧШЕЙ ЦЕНЫ"
                 onClick={e => {
-                  handleClickPrice(e);
+                  handleClickButton(e);
                 }}
               >
                 <span className={style.spanSvg}>
@@ -165,7 +216,7 @@ export default function CardSelected({ item }: { item: IProduct }) {
                 className={`${style.about} ${style.textStyle}`}
                 data-text="КАК ОПРЕДЕЛИТЬ РАЗМЕР?"
                 onClick={e => {
-                  handleClickPrice(e);
+                  handleClickButton(e);
                 }}
               >
                 <span className={style.spanSvg}>
@@ -205,7 +256,7 @@ export default function CardSelected({ item }: { item: IProduct }) {
                 className={`${style.about} ${style.textStyle}`}
                 data-text="СПОСОБЫ ДОСТАВКИ И ОПЛАТЫ"
                 onClick={e => {
-                  handleClickPrice(e);
+                  handleClickButton(e);
                 }}
               >
                 <span className={style.spanSvg}>
@@ -244,7 +295,7 @@ export default function CardSelected({ item }: { item: IProduct }) {
                 className={`${style.about} ${style.textStyle}`}
                 data-text="ОБМЕН И ВОЗВРАТ"
                 onClick={e => {
-                  handleClickPrice(e);
+                  handleClickButton(e);
                 }}
               >
                 <span className={style.spanSvg}>

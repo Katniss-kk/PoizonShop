@@ -1,21 +1,41 @@
-import type { PageItem } from '../../types';
+import type { IProduct, PageItem } from '../../types';
 import { CardItem, Separator } from '../../UI';
 import style from './PageItems.module.css';
-
-import { useData } from '../../hooks/dataProvider';
-
+import {
+  setBrandsAndSizes,
+  setFilterProducts,
+  setProductsData,
+} from '../../../service/slices/filterProductsSlice';
+import { useAppDispatch, useAppSelector } from '../../../service/store';
 import { ButtonFilter } from '../../UI';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function PageItems({ items, title, catalog }: PageItem) {
-  const { data, updateData } = useData();
+export default function PageItems({
+  items,
+  title,
+  catalog,
+  loading,
+}: PageItem) {
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    updateData({
-      data: items,
-      filterData: items
-    });
-  }, []);
+    dispatch(setProductsData(items));
+    dispatch(setBrandsAndSizes(items));
+    dispatch(setFilterProducts());
+  }, [dispatch, items]);
+
+  const productsItem =
+    useAppSelector(state => state.filter.filterProducts) || items;
+
+  if (loading) {
+    return (
+      <div>
+        <h1 style={{ textAlign: 'center', margin: '50px' }}>
+          Загрузка товаров...
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -26,11 +46,11 @@ export default function PageItems({ items, title, catalog }: PageItem) {
         </div>
         <Separator />
         <div className={style.buttonContainer}>
-          <ButtonFilter />
+          <ButtonFilter items={items} />
         </div>
       </section>
       <section className={style.containerSection}>
-        {data.filterData.map(item => (
+        {productsItem.map(item => (
           <div
             className={style.containerItem}
             key={`${item.title}-${item.brand}`}

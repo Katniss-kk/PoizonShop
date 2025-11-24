@@ -14,11 +14,9 @@ export function DataFilter(data: DataProvider): IProduct[] {
       return false;
     
     if (data.sizes.length > 0) {
-      // item.size - массив размеров, проверяем пересечение
       const itemSizes = Array.isArray(item.size) ? item.size : [item.size];
       const filterSizes = data.sizes.map(size => String(size).trim());
       
-      // Проверяем, есть ли хотя бы один общий размер
       const hasSizeMatch = itemSizes.some(itemSize => 
         filterSizes.includes(String(itemSize).trim())
       );

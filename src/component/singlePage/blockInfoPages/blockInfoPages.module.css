@@ -1,6 +1,6 @@
 .deliveryContainer {
   padding-inline: max(20px, 25vw);
-padding-inline: min(480px, 25vw);
+  padding-inline: min(480px, 25vw);
   padding-block-start: 73px;
   padding-block-end: 45px;
 }
@@ -40,14 +40,14 @@ padding-inline: min(480px, 25vw);
 }
 
 .separator {
-    inline-size: 121px;
-    justify-self: center;
+  inline-size: 121px;
+  justify-self: center;
 }
 
 .textSpan {
-    font-weight: 400;
-    font-size: 20px;
-    text-align: center;
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
 }
 
 .textSpanBold {
@@ -59,4 +59,28 @@ padding-inline: min(480px, 25vw);
   display: grid;
   grid-auto-flow: row;
   row-gap: 45px;
+}
+
+@media(max-width: 1025px) {
+  .deliveryContainer {
+    padding-inline: 150px;
+  }
+}
+
+@media(max-width: 769px) {
+  .deliveryContainer {
+    padding-inline: 100px;
+  }
+}
+
+@media(max-width: 426px) {
+  .deliveryContainer {
+    padding-inline: 50px;
+  }
+}
+
+@media(max-width: 376px) {
+  .deliveryContainer {
+    padding-inline: 20px;
+  }
 }

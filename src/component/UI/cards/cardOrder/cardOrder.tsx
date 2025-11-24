@@ -1,57 +1,117 @@
 import { useEffect, useState } from 'react';
-import { useData } from '../../../hooks/dataProvider';
-import type { IProduct } from '../../../types';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../../service/store';
+import {
+  validateAndPushOrder,
+  setHowBuy,
+  setAddress,
+  setContacts,
+  setNumber,
+  setSizeState,
+} from '../../../../service/slices/orderSlice';
 import style from './cardOrder.module.css';
 
 export default function CardOrder() {
-  const { order, updateOrder } = useData();
-  const [size, setSize] = useState<number | ''>(order.size);
-  const [howBuy, setHowBuy] = useState<string>('');
-  const [address, setAddress] = useState<string>('');
-  const [contacts, setContacts] = useState<string>('');
-  const [number, setNumber] = useState<string>('');
-  const [errors, setErrors] = useState({
-    size: true,
-    howBuy: true,
-    address: true,
-    contacts: true,
-    number: true,
+  const [localHowBuy, setLocalHowBuy] = useState<string>('');
+  const [localAddress, setLocalAddress] = useState<string>('');
+  const [localContacts, setLocalContacts] = useState<string>('');
+  const [localNumber, setLocalNumber] = useState<string>('');
+  const [tempErrors, setTempErrors] = useState({
+    size: false,
+    howBuy: false,
+    address: false,
+    contacts: false,
+    number: false,
   });
 
-  const priceDelivery = 400;
+  const product = useAppSelector(state => state.order.product);
+  const size = useAppSelector(state => state.order.size);
+  const errors = useAppSelector(state => state.order.errors);
 
-  const handleClickSize = (size: number) => {
-    setSize(size);
-  };
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const orderValidation = () => {
-    const hasSizes = order.product.size && order.product.size.length > 0;
-    const newErrors = {
-      size: !hasSizes || (hasSizes && size !== 0 && size !== ''),
-      howBuy: howBuy !== '',
-      address: address !== '',
-      contacts: contacts !== '',
-      number: number !== '' && number.length >= 8,
-    };
-    setErrors(newErrors);
-    return newErrors;
-  };
+  // Эффект для временной подсветки ошибок
+  useEffect(() => {
+    const hasAnyErrors = Object.values(errors).some(error => error);
+    if (hasAnyErrors) {
+      setTempErrors(errors);
+
+      const timer = setTimeout(() => {
+        setTempErrors({
+          size: false,
+          howBuy: false,
+          address: false,
+          contacts: false,
+          number: false,
+        });
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
+
+  // Синхронизация с Redux
+  useEffect(() => {
+    dispatch(setHowBuy(localHowBuy));
+  }, [localHowBuy, dispatch]);
+
+  useEffect(() => {
+    dispatch(setAddress(localAddress));
+  }, [localAddress, dispatch]);
+
+  useEffect(() => {
+    dispatch(setContacts(localContacts));
+  }, [localContacts, dispatch]);
+
+  useEffect(() => {
+    dispatch(setNumber(localNumber));
+  }, [localNumber, dispatch]);
+
+  useEffect(() => {
+    if (!product) {
+      navigate('/PoizonShop/');
+    }
+  }, [product, navigate]);
 
   const handleClickApply = () => {
-    const validationResult = orderValidation();
-
-    if (Object.values(validationResult).every(Boolean)) {
-      updateOrder({
-        size: size,
-        receive: howBuy,
-        point: address,
-        name: contacts,
-        number: number,
+    dispatch(validateAndPushOrder())
+      .unwrap()
+      .then(result => {
+        if (result) {
+          navigate('/PoizonShop/');
+        }
+      })
+      .catch(error => {
+        console.log('Ошибка при оформлении заказа:', error);
       });
-    }
   };
 
-  const product: IProduct = order.product;
+  const handleClickSize = (selectedSize: number) => {
+    dispatch(setSizeState(selectedSize));
+  };
+
+  const handleHowBuyChange = (method: string) => {
+    setLocalHowBuy(method);
+  };
+
+  const handleAddressChange = (value: string) => {
+    setLocalAddress(value);
+  };
+
+  const handleContactsChange = (value: string) => {
+    setLocalContacts(value);
+  };
+
+  const handleNumberChange = (value: string) => {
+    setLocalNumber(value);
+  };
+
+  if (!product) {
+    return null;
+  }
+
+  const priceDelivery = 400;
 
   return (
     <div className={style.productCard}>
@@ -59,6 +119,7 @@ export default function CardOrder() {
         <h1 className={`${style.textStyle} ${style.title}`}>
           Оформление заказа
         </h1>
+
         <div className={style.productContainer}>
           <img
             src={product.img[0]}
@@ -87,59 +148,52 @@ export default function CardOrder() {
             </span>
           </div>
         </div>
-        {product.size?.length > 0 && (
+
+        {product.size && product.size.length > 0 && (
           <div className={style.sizeContainer}>
-            {product.size?.map(item => (
+            {product.size.map(item => (
               <button
                 key={item}
                 className={`${style.size} ${
                   size === item ? style.sizeActive : ''
-                } ${errors.size === false ? style.errorMesseg : ''}`}
-                onClick={() => {
-                  handleClickSize(item);
-                }}
+                } ${tempErrors.size ? style.errorMesseg : ''}`}
+                onClick={() => handleClickSize(Number(item))}
               >
                 {item}
               </button>
             ))}
           </div>
         )}
+
         <div className={style.buyContainer}>
           <h3 className={`${style.textStyle} ${style.buyTitle}`}>
             Как получать
           </h3>
           <button
             className={`${style.textStyle} ${style.buyButton} ${
-              howBuy === 'В пункте выдачи' ? style.buyButtonActive : ''
-            }
-            ${errors.howBuy === false ? style.errorMesseg : ''}`}
-            onClick={() => {
-              setHowBuy('В пункте выдачи');
-            }}
+              localHowBuy === 'В пункте выдачи' ? style.buyButtonActive : ''
+            } ${tempErrors.howBuy ? style.errorMesseg : ''}`}
+            onClick={() => handleHowBuyChange('В пункте выдачи')}
           >
             В пункте выдачи
           </button>
           <button
             className={`${style.textStyle} ${style.buyButton} ${
-              howBuy === 'В магазине' ? style.buyButtonActive : ''
-            }
-            ${errors.howBuy === false ? style.errorMesseg : ''}`}
-            onClick={() => {
-              setHowBuy('В магазине');
-            }}
+              localHowBuy === 'В магазине' ? style.buyButtonActive : ''
+            } ${tempErrors.howBuy ? style.errorMesseg : ''}`}
+            onClick={() => handleHowBuyChange('В магазине')}
           >
             В магазине
           </button>
           <input
             type="text"
             placeholder="Адрес пункта выдачи"
-            className={`${style.inputText} ${errors.address === false ? style.errorMesseg : ''}`}
-            value={address}
-            onChange={e => {
-              setAddress(e.target.value);
-            }}
+            className={`${style.inputText} ${tempErrors.address ? style.errorMesseg : ''}`}
+            value={localAddress}
+            onChange={e => handleAddressChange(e.target.value)}
           />
         </div>
+
         <div className={style.buyContainer}>
           <h3 className={`${style.textStyle} ${style.buyTitle}`}>
             Кому выдать
@@ -147,30 +201,28 @@ export default function CardOrder() {
           <input
             type="text"
             placeholder="Имя и фамилия"
-            className={`${style.inputText} ${errors.contacts === false ? style.errorMesseg : ''}`}
-            value={contacts}
-            onChange={e => {
-              setContacts(e.target.value);
-            }}
+            className={`${style.inputText} ${tempErrors.contacts ? style.errorMesseg : ''}`}
+            value={localContacts}
+            onChange={e => handleContactsChange(e.target.value)}
           />
           <input
             type="text"
             placeholder="+7 (•••) •••-••-••"
-            className={`${style.inputText} ${errors.number === false ? style.errorMesseg : ''}`}
-            value={number}
-            onChange={e => {
-              setNumber(e.target.value);
-            }}
+            className={`${style.inputText} ${tempErrors.number ? style.errorMesseg : ''}`}
+            value={localNumber}
+            onChange={e => handleNumberChange(e.target.value)}
           />
         </div>
-        <div className="" style={{ inlineSize: '100%', margin: '30px 0' }}>
+
+        <div style={{ inlineSize: '100%', margin: '30px 0' }}>
           <hr />
         </div>
+
         <div className={style.resultContainer}>
           <div className={style.resultBlock}>
             <h3 className={`${style.textStyle} ${style.textResult}`}>Товар</h3>
             <h3 className={`${style.textStyle} ${style.textResult}`}>
-              {order.product.price}
+              {product.price}
             </h3>
           </div>
           <div className={style.resultBlock}>
@@ -178,7 +230,7 @@ export default function CardOrder() {
               className={`${style.textStyle} ${style.textResult} ${style.delivery}`}
             >
               Доставка
-              <span className={`${style.resultSpan}`}>
+              <span className={style.resultSpan}>
                 Оплачивается при получении
               </span>
             </h3>
@@ -187,14 +239,12 @@ export default function CardOrder() {
             </h3>
           </div>
         </div>
-        <button
-          className={style.applyButton}
-          onClick={() => {
-            handleClickApply();
-          }}
-        >
-          {Number(order.product.price.replace(/\./g, '')) + priceDelivery}₽
-          Оплатить
+
+        <button className={style.applyButton} onClick={handleClickApply}>
+          {(
+            priceDelivery + parseInt(product.price.replace(/[^\d]/g, ''))
+          ).toLocaleString('ru-RU')}{' '}
+          ₽ Оплатить
         </button>
       </div>
     </div>

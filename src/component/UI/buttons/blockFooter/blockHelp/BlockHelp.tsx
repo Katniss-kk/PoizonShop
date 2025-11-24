@@ -1,29 +1,22 @@
 import style from '../BlockFooter.module.css';
-import { QuestionsPage, DeliveryPage } from '../../../../singlePage';
-import { useData } from '../../../../hooks/dataProvider';
+import { Link } from 'react-router-dom';
 
 export default function BlockHelp() {
-  const { setPage } = useData();
-
   return (
     <div className={style.helpContainer}>
       <h5 className={`${style.text} ${style.title}`}>Помощь</h5>
-      <button
+      <Link
+        to={'PoizonShop/questions'}
         className={`${style.text} ${style.helpButton}`}
-        onClick={() => {
-          setPage(<QuestionsPage />);
-        }}
       >
         Частые вопросы
-      </button>
-      <button
+      </Link>
+      <Link
+        to={'PoizonShop/delivery'}
         className={`${style.text} ${style.helpButton}`}
-        onClick={() => {
-          setPage(<DeliveryPage />);
-        }}
       >
         Доставка и самовывоз
-      </button>
+      </Link>
     </div>
   );
 }

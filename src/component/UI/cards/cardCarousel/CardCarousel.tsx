@@ -14,16 +14,16 @@ export default function CardCarousel({
   items,
   autoPlay = false,
   showPagination = true,
+  loading,
 }: CardCarouselProps) {
   const swiperRef = useRef<SwiperType>();
   const [currentPage, setCurrentPage] = useState(1);
-  
-  // Функция для расчета количества карточек и страниц
+
   const getSwiperConfig = () => {
     const width = window.innerWidth;
-    
+
     if (width < 768) {
-      return { slidesPerView: 1, slidesPerGroup: 1, itemsPerPage: 1 };
+      return { slidesPerView: 2, slidesPerGroup: 2, itemsPerPage: 2 };
     } else if (width < 1024) {
       return { slidesPerView: 2, slidesPerGroup: 2, itemsPerPage: 2 };
     } else if (width < 1280) {
@@ -35,6 +35,14 @@ export default function CardCarousel({
 
   const config = getSwiperConfig();
   const totalPages = Math.ceil(items.length / config.itemsPerPage);
+
+  if (loading) {
+    return (
+      <div>
+        <h1 style={{ textAlign: 'center' }}>Загрузка товаров...</h1>
+      </div>
+    );
+  }
 
   return (
     <div className={style.customSwiperContainer}>
@@ -59,30 +67,24 @@ export default function CardCarousel({
         }
         loop={false}
         breakpoints={{
-          // Мобильные телефоны
-          320: {
-            slidesPerView: 1,
-            slidesPerGroup: 1,
-            spaceBetween: 10
+          425: {
+            spaceBetween: 0,
           },
-          // Планшеты
           768: {
             slidesPerView: 2,
             slidesPerGroup: 2,
-            spaceBetween: 15
+            spaceBetween: 15,
           },
-          // Ноутбуки
           1024: {
             slidesPerView: 3,
             slidesPerGroup: 3,
-            spaceBetween: 20
+            spaceBetween: 20,
           },
-          // Десктоп
           1280: {
             slidesPerView: 4,
             slidesPerGroup: 4,
-            spaceBetween: 20
-          }
+            spaceBetween: 20,
+          },
         }}
       >
         {items.map(item => (

@@ -16,6 +16,7 @@ export interface CardOneItem {
 export interface CardCarouselProps extends CardItems {
   autoPlay?: boolean;
   showPagination?: boolean;
+  loading?: boolean;
 }
 
 export interface IProduct {
@@ -30,6 +31,7 @@ export interface IProduct {
 export interface PageItem extends CardItems {
   title: string;
   catalog: string;
+  loading?: boolean;
 }
 
 export interface ModalProps {
@@ -41,8 +43,8 @@ export interface ModalProps {
 }
 
 export interface IBrandSize {
-  allBrands?: { name: string; value: number }[];
-  allSizes?: { name: string; value: number }[];
+  allBrands?: string[];
+  allSizes?: string[];
 }
 
 export interface DataProvider {
@@ -70,7 +72,7 @@ export interface DataContextType {
   page: React.ReactNode;
   setPage: React.Dispatch<React.SetStateAction<React.ReactNode>>;
   order: order;
-  setOrder: React.Dispatch<React.SetStateAction<order>>
+  setOrder: React.Dispatch<React.SetStateAction<order>>;
 }
 
 export interface DataProviderProps {
@@ -84,4 +86,8 @@ export interface order {
   point: string;
   name: string;
   number: string | '';
+}
+
+export interface UserMenu {
+  style: CSSModuleClasses;
 }

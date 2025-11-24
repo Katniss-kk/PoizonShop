@@ -90,3 +90,20 @@
   border-radius: 100px;
   margin-block-start: 13px;
 }
+
+@media(max-width: 768px) {
+  .textPrice {
+    display: none;
+  }
+  .slider {
+    display: none;
+  }
+  .containerInput {
+    grid-auto-flow: row;
+    row-gap: 20px;
+    margin-block-start: 0;
+  }
+  .text {
+    inline-size: 100%;
+  }
+}

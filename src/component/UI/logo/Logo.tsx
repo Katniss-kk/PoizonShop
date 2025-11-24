@@ -1,11 +1,9 @@
-import { MainPage } from '../../singlePage';
 import type { LogoProps } from '../../types';
 
 import { useData } from '../../hooks/dataProvider';
+import { Link } from 'react-router-dom';
 
 export default function Logo({ className = '' }: LogoProps) {
-  const { setPage } = useData();
-
   return (
     <svg
       width="49"
@@ -13,7 +11,6 @@ export default function Logo({ className = '' }: LogoProps) {
       viewBox="0 0 49 35"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      onClick={() => setPage(<MainPage />)}
     >
       <rect x="15.9" y="0" width="7.4" height="35" fillOpacity="0.3" />
       <polygon points="15.9,0 23.3,0 7.4,35 0,35" />

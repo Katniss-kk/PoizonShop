@@ -1,0 +1,11 @@
+.buttonSvg {
+  display: none;
+  fill: var(--button-svg-color);
+}
+
+@media (max-width: 768px) {
+  .buttonSvg {
+    display: block;
+    margin-block-end: 5px;
+  }
+}

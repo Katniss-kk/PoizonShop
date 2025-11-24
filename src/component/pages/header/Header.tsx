@@ -1,21 +1,25 @@
 import style from './Header.module.css';
 import {
-  TopMenuButton,
+  UserMenu,
   TelegramButton,
   Logo,
   BasketButton,
+  MobileMenu,
 } from '../../UI/index';
-import { useData } from '../../hooks/dataProvider';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
     <header>
       <div className={style.logoMenuContainer}>
-        <Logo className={style.logo} />
-        <TopMenuButton />
+        <Link to={'PoizonShop/'}>
+          <Logo className={style.logo} />
+        </Link>
+        <UserMenu style={style} />
       </div>
       <div className={style.headerContainer}>
-        <BasketButton />
+        {/* <BasketButton /> */}
+        <MobileMenu />
         <TelegramButton
           className={style.topButton}
           classSpan={style.buttonSpan}

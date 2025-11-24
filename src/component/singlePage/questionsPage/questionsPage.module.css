@@ -58,3 +58,21 @@
     color: var(--color-main-text);
     margin-block-start: 9px;
 }
+
+@media (max-width: 769px) {
+    .pageContainer {
+        padding-inline: 50px;
+    }
+}
+
+@media(max-width: 426px) {
+    .pageContainer {
+        padding-inline: 25px;
+    }
+}
+
+@media(max-width: 376px) {
+    .pageContainer {
+        padding-inline: 10px;
+    }
+}

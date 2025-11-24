@@ -25,4 +25,12 @@
   max-block-size: max-content;
   max-inline-size: max-content;
   text-align: start;
+  text-decoration: none;
+}
+
+@media(max-width: 768px) {
+  .helpContainer {
+    max-inline-size: none;
+    inline-size: 100%;
+  }
 }

@@ -2,41 +2,38 @@ import style from './buttonFilter.module.css';
 import { useState, type ReactNode, useEffect } from 'react';
 import { Modal, FilterPrice, FilterBrandSize } from '../../../UI';
 
-import { useData } from '../../../hooks/dataProvider';
+import type { IProduct } from '../../../types';
+import {
+  setMaxPriceData,
+  setMinPriceData,
+} from '../../../../service/slices/filterProductsSlice';
+import { useAppDispatch, useAppSelector } from '../../../../service/store';
 
-export default function ButtonFilter() {
+export default function ButtonFilter({ items }: { items: IProduct[] }) {
+  const dispatch = useAppDispatch();
+  const brands = useAppSelector(state => state.filter.brands);
+  const sizes = useAppSelector(state => state.filter.sizes);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<ReactNode>(null);
   const [activeButton, setActiveButton] = useState<string | null>(null);
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(0);
-  const { data, updateData, updateWaitData, waitData } = useData();
+
+  const numArray = items.map(item => parseInt(item.price.replace('.', ''), 10));
+
+  const selectedMinPrice = useAppSelector(state =>
+    Number(state.filter.selectedMinPrice)
+  );
+  const selectedMaxPrice = useAppSelector(state =>
+    Number(state.filter.selectedMaxPrice)
+  );
+
+  const actualMinPrice = Math.min(...numArray);
+  const actualMaxPrice = Math.max(...numArray);
 
   useEffect(() => {
-    if (data.data.length === 0) return;
-
-    const numArray = data.data.map(item =>
-      parseInt(item.price.replace('.', ''), 10)
-    );
-
-    const actualMinPrice = Math.min(...numArray);
-    const actualMaxPrice = Math.max(...numArray);
-
-    setMinPrice(actualMinPrice);
-    setMaxPrice(actualMaxPrice);
-
-    updateData({
-      minPrice: actualMinPrice,
-      maxPrice: actualMaxPrice,
-    });
-
-    updateWaitData({
-      minPrice: actualMinPrice,
-      maxPrice: actualMaxPrice,
-      minAllPrice: actualMinPrice,
-      maxAllPrice: actualMaxPrice
-    });
-  }, [data.data]);
+    dispatch(setMinPriceData(actualMinPrice));
+    dispatch(setMaxPriceData(actualMaxPrice));
+  }, [actualMinPrice, actualMaxPrice]);
 
   const toggleModal = (content: ReactNode, buttonType: string) => {
     if (isModalOpen && activeButton === buttonType) {
@@ -79,20 +76,20 @@ export default function ButtonFilter() {
         onClick={() =>
           toggleModal(
             <FilterPrice
-              minPrice={minPrice}
-              maxPrice={maxPrice}
+              actualMinPrice={actualMinPrice}
+              actualMaxPrice={actualMaxPrice}
             />,
             'price'
           )
         }
       >
-        {waitData.minPrice.toLocaleString()}₽ - {waitData.maxPrice.toLocaleString()}₽
+        {selectedMinPrice.toLocaleString()}₽ - {selectedMaxPrice.toLocaleString()}₽
       </button>
 
       <button
         className={style.button}
         onClick={() =>
-          toggleModal(<FilterBrandSize allBrands={waitData.allBrands} />, 'brand')
+          toggleModal(<FilterBrandSize allBrands={brands} />, 'brand')
         }
       >
         Бренд
@@ -101,7 +98,9 @@ export default function ButtonFilter() {
 
       <button
         className={style.button}
-        onClick={() => toggleModal(<FilterBrandSize allSizes={waitData.allSizes} />, 'size')}
+        onClick={() =>
+          toggleModal(<FilterBrandSize allSizes={sizes} />, 'size')
+        }
       >
         Размер
         <SvgIcon />

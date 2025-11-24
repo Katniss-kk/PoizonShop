@@ -8,6 +8,7 @@
 
 .productTitle {
     margin-block-start: 23px;
+    text-align: center;
 }
 
 .productBrand {
@@ -20,6 +21,15 @@
     font-size: 18px;
 }
 
-@media(max-width: 1640px) {
-    
+@media(max-width: 768px) {
+    .productTitle {
+        text-align: center;
+        margin-block-start: 3px;
+    }
+    .productBrand {
+        margin-block-start: 12px;
+    }
+    .productPrice {
+        margin-block-start: 9px;
+    }
 }

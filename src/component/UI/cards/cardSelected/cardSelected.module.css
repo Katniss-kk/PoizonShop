@@ -18,6 +18,8 @@
 }
 
 .imgContainer {
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
   inline-size: 1020px;
 }
 
