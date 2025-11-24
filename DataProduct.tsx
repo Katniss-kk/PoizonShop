@@ -1,22 +1,18 @@
-import type { IProduct } from "../src/component/types";
+import type { IProduct } from '../src/component/types';
 
-export const DataShoes: IProduct[] = [
+export const Data: IProduct[] = [
   {
     type: 'Обувь',
     title: 'Air Jordan 1 Retro High OG "Yellow Ochre"',
-    img: [
-      './images/airjordan1.png'
-    ],
+    img: ['./images/airjordan1.png'],
     brand: 'Nike',
     size: [38, 39, 40, 41, 42, 43, 44, 45],
     price: '27.000',
   },
   {
-    type: 'Аксессуар',
+    type: 'Аксессуары',
     title: 'Leather Pocket Bag "Black"',
-    img: [
-      './images/pocketbag.png'
-    ],
+    img: ['./images/pocketbag.png'],
     brand: 'Miu Miu',
     size: [],
     price: '12.999',
@@ -24,9 +20,7 @@ export const DataShoes: IProduct[] = [
   {
     type: 'Обувь',
     title: 'Air Jordan 1 Retro High  "Shattered Backboard 3.0',
-    img: [
-      './images/airjordan.png',
-    ],
+    img: ['./images/airjordan.png'],
     brand: 'Nike',
     size: [41, 42, 43, 44, 45, 46, 47],
     price: '14.850',
@@ -34,9 +28,7 @@ export const DataShoes: IProduct[] = [
   {
     type: 'Обувь',
     title: 'Dunk Low Retro "Black / White"',
-    img: [
-      './images/Dunk_Low_Retro_Black_White 1.png',
-    ],
+    img: ['./images/Dunk_Low_Retro_Black_White 1.png'],
     brand: 'Nike',
     size: [35, 36, 37, 38, 39, 40],
     price: '11.900',
@@ -49,7 +41,7 @@ export const DataShoes: IProduct[] = [
     size: [40, 41, 42],
     price: '11.900',
   },
-    {
+  {
     type: 'Обувь',
     title: 'SB Dunk Low "Mummy"',
     img: ['./images/sb-dunk-low-mummy 1.png'],
@@ -57,12 +49,12 @@ export const DataShoes: IProduct[] = [
     size: [44, 45, 46, 47],
     price: '11.900',
   },
-    {
+  {
     type: 'Обувь',
     title: 'Dunk Low "Fossil Rose"',
     img: ['./images/dunk-low-fossil-rose 1.png'],
     brand: 'Nike',
-    size: [44, 45, 46 ,47],
+    size: [44, 45, 46, 47],
     price: '9.999',
   },
 ];
